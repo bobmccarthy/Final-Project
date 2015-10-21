@@ -1,11 +1,11 @@
 # Final-Project
 
 ```
-##Why:
+## Why:
 I believe in living a healthy lifestyle and the freedom to choose my own food.
-###How:
+### How:
 Everyone should have the opportunity to make grocery buying decisions based on dietary and health related restrictions.
-####What:
+#### What:
 As of now, there are very few resources to help people grocery shop that have limiting dietary restrictions.
 My app will store dietary information about users. You can choose what health or dietary restrictions you have and things you don't like. 
 The user will log on, select their favorite grocery store and a list will appear with ONLY the items that fit within their dietary restrictions. 
