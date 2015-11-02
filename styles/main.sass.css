@@ -52,6 +52,12 @@ body {
     background-image: url("../images/down-arrow.png");
     height: 2em; }
 
+.categoryTitle {
+  text-align: left; }
+
+#checkMark {
+  height: 1em; }
+
 .homeImg img {
   width: 60%;
   margin-left: 20%;
@@ -81,7 +87,7 @@ body {
 .listItems {
   height: 14em;
   padding: 1em; }
-  .listItems button {
+  .listItems div {
     float: right; }
 
 .toggler {

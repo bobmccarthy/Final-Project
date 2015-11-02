@@ -17,11 +17,7 @@ module.exports = React.createClass({
 		});
 	},
 	render: function() {
-		var counter=0;
 		var listy = this.state.lists.map(function(list){
-			if (counter==0){
-				<option value={list.id} selected="selected">{list.get('name')}</option>
-			}
 			return (
 				<option value={list.id}>{list.get('name')}</option>
 			)

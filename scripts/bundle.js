@@ -34234,15 +34234,7 @@ module.exports = React.createClass({
 		});
 	},
 	render: function render() {
-		var counter = 0;
 		var listy = this.state.lists.map(function (list) {
-			if (counter == 0) {
-				React.createElement(
-					'option',
-					{ value: list.id, selected: 'selected' },
-					list.get('name')
-				);
-			}
 			return React.createElement(
 				'option',
 				{ value: list.id },
@@ -34464,7 +34456,6 @@ module.exports = React.createClass({
 	displayName: "exports",
 
 	render: function render() {
-
 		return React.createElement(
 			"div",
 			{ className: "col-xs-6 col-sm-4 col-md-3 xtraMargin" },
@@ -34472,9 +34463,13 @@ module.exports = React.createClass({
 				"div",
 				{ className: "listItems box-shadow--6dp" },
 				React.createElement(
-					"button",
-					{ onClick: this.itemAdded },
-					"+"
+					"div",
+					{ id: 'button' + this.props.model.id, className: "button" },
+					React.createElement(
+						"button",
+						{ onClick: this.itemAdded },
+						"+"
+					)
 				),
 				React.createElement("img", { className: "itemPic", src: this.props.model.get('urlPic') }),
 				React.createElement(
@@ -34488,16 +34483,14 @@ module.exports = React.createClass({
 					this.props.model.get('price'),
 					"/",
 					this.props.model.get('priceCategory')
-				),
-				React.createElement(
-					"p",
-					null,
-					this.props.model.id
 				)
 			)
 		);
 	},
 	itemAdded: function itemAdded() {
+		// console.log(this.props.model.get('objectId'));
+		// $('#button'+this.props.model.get('objectId')).css('background-color', 'red');
+		$('#button' + this.props.model.id).html('<img id="checkMark" src="../../images/check-mark.gif"/>');
 		this.props.callback(this.props.model);
 	}
 
@@ -34513,7 +34506,7 @@ var ListModel = require('../models/ListModel');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
 var _listQuery = new Parse.Query(ListModel);
-var listIt = [];
+
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent = require('./ListDropdownComponent');
 
@@ -34523,6 +34516,12 @@ module.exports = React.createClass({
 	getInitialState: function getInitialState() {
 		return {
 			items: [],
+			produce: [],
+			breads: [],
+			snacks: [],
+			desserts: [],
+			soups: [],
+			international: [],
 			error: null,
 			listItems: [],
 			currentList: []
@@ -34532,7 +34531,6 @@ module.exports = React.createClass({
 		var _this = this;
 
 		this.props.router.on('route', function () {
-
 			_this.setState({
 				listItems: []
 			});
@@ -34546,17 +34544,54 @@ module.exports = React.createClass({
 		productQuery.find().then(function (products) {
 			_this.setState({ items: products });
 		});
+		productQuery.equalTo('category', 'produce');
+		productQuery.find().then(function (products) {
+			_this.setState({ produce: products });
+		});
+		productQuery.equalTo('category', 'breads');
+		productQuery.find().then(function (products) {
+			_this.setState({ breads: products });
+		});
+		productQuery.equalTo('category', 'soups');
+		productQuery.find().then(function (products) {
+			_this.setState({ soups: products });
+		});
+		productQuery.equalTo('category', 'snacks');
+		productQuery.find().then(function (products) {
+			_this.setState({ snacks: products });
+		});
+		productQuery.equalTo('category', 'desserts');
+		productQuery.find().then(function (products) {
+			_this.setState({ desserts: products });
+		});
+		productQuery.equalTo('category', 'international');
+		productQuery.find().then(function (products) {
+			_this.setState({ international: products });
+		});
 	},
 	render: function render() {
 		var _this2 = this;
 
-		// var mappy = this.state.currentList.map((products) => {
-		// 	console.log(products)
-		// 	listIt.push(products);
-		// 	console.log(listIt);
-		// })
 		var listDropdown = React.createElement(ListDropdownComponent, { router: this.props.router });
-		var postElements = this.state.items.map(function (product) {
+		var allElements = this.state.items.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var produceElements = this.state.produce.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var breadElements = this.state.breads.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var dessertElements = this.state.desserts.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var soupElements = this.state.soups.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var snackElements = this.state.snacks.map(function (product) {
+			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+		});
+		var internationalElements = this.state.international.map(function (product) {
 			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
 		});
 		return React.createElement(
@@ -34589,7 +34624,7 @@ module.exports = React.createClass({
 						React.createElement(
 							'p',
 							{ className: 'or' },
-							' Or '
+							' or '
 						),
 						React.createElement(
 							'a',
@@ -34619,7 +34654,62 @@ module.exports = React.createClass({
 				React.createElement(
 					'div',
 					{ className: 'row' },
-					postElements
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'Produce:'
+					),
+					produceElements
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'Breads:'
+					),
+					breadElements
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'Desserts:'
+					),
+					dessertElements
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'Soups:'
+					),
+					soupElements
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'Snacks:'
+					),
+					snackElements
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'h3',
+						{ className: 'categoryTitle' },
+						'International:'
+					),
+					internationalElements
 				)
 			)
 		);
@@ -34627,6 +34717,7 @@ module.exports = React.createClass({
 	onItemAdded: function onItemAdded(model) {
 		var _this3 = this;
 
+		// $('#button/'+model.id).css('background-color', 'red');
 		var list = new ListModel();
 		this.setState({
 			listItems: this.state.listItems + ',' + model.id

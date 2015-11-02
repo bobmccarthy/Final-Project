@@ -69,7 +69,12 @@ body{
 		height: 2em;
 	}
 }
-
+.categoryTitle{
+	text-align: left;
+}
+#checkMark{
+	height: 1em;
+}
 .homeImg{
 	img{
 		width: 60%;
@@ -104,7 +109,7 @@ body{
 .listItems{
 	height: 14em;
 	padding: 1em;
-	button{
+	div{
 		float: right;
 	}
 }
