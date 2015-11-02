@@ -1,5 +1,6 @@
 body {
-  margin: 0; }
+  margin: 0;
+  margin-top: 2.4em; }
 
 #login {
   z-index: 900;
@@ -32,6 +33,13 @@ body {
     background-color: red;
     color: white;
     padding: 2em; }
+  .bottom-navbar .searches .or {
+    display: inline; }
+  .bottom-navbar .searches a {
+    text-decoration: none;
+    display: inline; }
+    .bottom-navbar .searches a button {
+      color: black; }
   .bottom-navbar p {
     font-size: 1.2em;
     margin-top: 0.75em;
@@ -62,6 +70,10 @@ body {
 
 .eachList {
   padding: 1em; }
+  .eachList button {
+    float: right; }
+  .eachList .listContents {
+    display: none; }
 
 .xtraMargin {
   margin-top: 1em; }
@@ -71,6 +83,9 @@ body {
   padding: 1em; }
   .listItems button {
     float: right; }
+
+.toggler {
+  display: none; }
 
 .itemPic {
   height: 5em; }

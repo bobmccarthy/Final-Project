@@ -25,13 +25,13 @@ module.exports = React.createClass({
 		});
 	},
 	render: function() {
-		console.log(this.state.lists);
+		// console.log(this.state.lists);
 		var jibby = this.state.lists.map((list) => {
 			return (
 				
-						<div className="col-xs-6">
-							<ListBoxComponent model={list} />
-						</div>
+				<div className="col-xs-8">
+					<ListBoxComponent model={list} id={list.id}/>
+				</div>
 					
 			)
 		})

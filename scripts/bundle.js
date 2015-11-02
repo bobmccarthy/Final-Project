@@ -34093,7 +34093,7 @@ module.exports = React.createClass({
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
-		console.log(this.state.product);
+		// console.log(this.state.product);
 		productQuery.contains('objectId', this.state.product);
 		productQuery.find().then(function (product) {
 			_this.setState({
@@ -34105,7 +34105,7 @@ module.exports = React.createClass({
 		var y = this.state.item.map(function (item) {
 			return React.createElement(
 				'div',
-				null,
+				{ className: 'listItemDeets' },
 				React.createElement(
 					'div',
 					null,
@@ -34152,6 +34152,8 @@ module.exports = React.createClass({
 'use strict';
 
 var React = require('react');
+window.$ = require('jquery');
+window.jQuery = $;
 var EachProductComponent = require('./EachProductComponent');
 
 module.exports = React.createClass({
@@ -34163,7 +34165,8 @@ module.exports = React.createClass({
 		return { products: x };
 	},
 	render: function render() {
-		console.log(this.state.products);
+
+		// console.log(this.state.products);
 		var each = this.state.products.map(function (list) {
 			return React.createElement(EachProductComponent, { model: list });
 		});
@@ -34174,18 +34177,40 @@ module.exports = React.createClass({
 				'div',
 				{ className: 'eachList' },
 				React.createElement(
+					'button',
+					{ onClick: this.expand },
+					'+'
+				),
+				React.createElement(
 					'h2',
 					null,
 					this.props.model.get('name')
 				),
-				each
+				React.createElement(
+					'h6',
+					null,
+					this.props.model.get('createdAt').toString().substring(0, 10)
+				),
+				React.createElement(
+					'div',
+					null,
+					'Total: $'
+				),
+				React.createElement(
+					'section',
+					{ className: 'toggler', id: this.props.id },
+					each
+				)
 			)
 		);
+	},
+	expand: function expand() {
+		$('#' + this.props.id).toggle('slow');
 	}
 
 });
 
-},{"./EachProductComponent":174,"react":173}],177:[function(require,module,exports){
+},{"./EachProductComponent":174,"jquery":17,"react":173}],177:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34209,7 +34234,15 @@ module.exports = React.createClass({
 		});
 	},
 	render: function render() {
+		var counter = 0;
 		var listy = this.state.lists.map(function (list) {
+			if (counter == 0) {
+				React.createElement(
+					'option',
+					{ value: list.id, selected: 'selected' },
+					list.get('name')
+				);
+			}
 			return React.createElement(
 				'option',
 				{ value: list.id },
@@ -34260,12 +34293,12 @@ module.exports = React.createClass({
 		});
 	},
 	render: function render() {
-		console.log(this.state.lists);
+		// console.log(this.state.lists);
 		var jibby = this.state.lists.map(function (list) {
 			return React.createElement(
 				'div',
-				{ className: 'col-xs-6' },
-				React.createElement(ListBoxComponent, { model: list })
+				{ className: 'col-xs-8' },
+				React.createElement(ListBoxComponent, { model: list, id: list.id })
 			);
 		});
 		return React.createElement(
@@ -34288,22 +34321,44 @@ module.exports = React.createClass({
 var React = require('react');
 var Backbone = require('backbone');
 var Bootstrap = require('bootstrap');
+var ListModel = require('../models/ListModel');
+var listQuery = new Parse.Query(ListModel);
+var selectedList;
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
+	getInitialState: function getInitialState() {
+		return {
+			selectedList: null
+		};
+	},
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
+		listQuery.first(function (list) {
+			_this.setState({
+				selectedList: list.id
+			});
+		});
 		this.props.router.on('route', function () {
 			_this.forceUpdate();
 		});
 	},
 	render: function render() {
+		// console.log($('#myLists').val());
+		// if (!$('#myLists').val()){
+		// 	listQuery.first((list) => {
+		// 		selectedList=list.id;
+		// 	});
+		// }
+		// else{
+		// 	selectedList=$('#myLists').val();
+		// }
+
 		var navChange = [];
 		var currentPage = Backbone.history.getFragment();
 		var subUrl = currentPage.substring(0, 13);
-
 		if (!Parse.User.current()) {
 			navChange.push(React.createElement(
 				'a',
@@ -34329,7 +34384,7 @@ module.exports = React.createClass({
 			));
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'e', className: subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn', href: '#productSearch' },
+				{ key: 'e', className: subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn', href: '#productSearch/' + this.state.selectedList },
 				'Product Picker'
 			));
 		}
@@ -34363,7 +34418,7 @@ module.exports = React.createClass({
 			),
 			React.createElement(
 				'div',
-				{ className: 'top-navbar' },
+				{ className: 'top-navbar navbar-fixed-top' },
 				React.createElement(
 					'a',
 					{ id: 'navBtn', className: currentPage === '' ? 'active box-shadow--2dp' : '', href: '#' },
@@ -34382,7 +34437,7 @@ module.exports = React.createClass({
 			success: function success(u) {
 				_this2.forceUpdate();
 				$('#login').hide();
-				_this2.props.router.navigate('productSearch', { trigger: true });
+				_this2.props.router.navigate('#productSearch/' + _this2.state.selectedList, { trigger: true });
 			},
 			error: function error(u, _error) {
 				_this2.setState({
@@ -34400,7 +34455,7 @@ module.exports = React.createClass({
 
 });
 
-},{"backbone":1,"bootstrap":3,"react":173}],180:[function(require,module,exports){
+},{"../models/ListModel":184,"backbone":1,"bootstrap":3,"react":173}],180:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -34457,7 +34512,7 @@ var $ = require('jquery');
 var ListModel = require('../models/ListModel');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
-var listQuery = new Parse.Query(ListModel);
+var _listQuery = new Parse.Query(ListModel);
 var listIt = [];
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent = require('./ListDropdownComponent');
@@ -34476,12 +34531,13 @@ module.exports = React.createClass({
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
-		listQuery.get(this.props.listId).then(function (list) {
-			return list.fetch();
-		}).then(function (result) {
-			// console.log(result);
-			_this.setState({ currentList: result });
+		this.props.router.on('route', function () {
+
+			_this.setState({
+				listItems: []
+			});
 		});
+
 		// listQuery.include('products');
 		// listQuery.find().then((list)=> {
 		// 	// console.log(list);
@@ -34529,7 +34585,21 @@ module.exports = React.createClass({
 							null,
 							'Add To List:'
 						),
-						listDropdown
+						listDropdown,
+						React.createElement(
+							'p',
+							{ className: 'or' },
+							' Or '
+						),
+						React.createElement(
+							'a',
+							{ href: '#newList' },
+							React.createElement(
+								'button',
+								{ className: 'box-shadow--2dp' },
+								'Add New'
+							)
+						)
 					),
 					React.createElement(
 						'div',
@@ -34557,8 +34627,6 @@ module.exports = React.createClass({
 	onItemAdded: function onItemAdded(model) {
 		var _this3 = this;
 
-		console.log(model.id);
-		console.log(this.props.listId);
 		var list = new ListModel();
 		this.setState({
 			listItems: this.state.listItems + ',' + model.id
@@ -34566,6 +34634,16 @@ module.exports = React.createClass({
 			list.set('objectId', _this3.props.listId);
 			list.set('products', _this3.state.listItems);
 			list.save();
+		});
+	},
+	listQuery: function listQuery() {
+		var _this4 = this;
+
+		_listQuery.get(this.props.listId).then(function (list) {
+			return list.fetch();
+		}).then(function (result) {
+			console.log(result.id);
+			_this4.setState({ currentList: result });
 		});
 	}
 

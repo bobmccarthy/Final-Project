@@ -11,7 +11,7 @@ module.exports = React.createClass({
 		}
 	},
 	componentWillMount: function(){
-		console.log(this.state.product);
+		// console.log(this.state.product);
 		productQuery.contains('objectId', this.state.product);
 		productQuery.find().then((product) => {
 			this.setState({

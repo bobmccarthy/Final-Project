@@ -19,14 +19,13 @@ module.exports = React.createClass({
 	    };
 	},
 	componentWillMount: function() {
-		listQuery.get(this.props.listId).then(
-			(list) =>{
-				return list.fetch();
-
-			}).then((result)=>{
-				// console.log(result);
-				this.setState({currentList: result});
+		this.props.router.on('route', () => {
+			
+			this.setState({
+				listItems:[]
 			});
+		});
+		
 		// listQuery.include('products');
 		// listQuery.find().then((list)=> {
 		// 	// console.log(list);
@@ -58,7 +57,10 @@ module.exports = React.createClass({
 						<div className="col-xs-12">
 							<p>Add To List:</p>
 							{listDropdown}
+							<p className="or"> Or </p>
+							<a href="#newList"><button className="box-shadow--2dp">Add New</button></a>
 						</div>
+
 						<div className="col-xs-12">
 							<input className="box-shadow--2dp" placeholder="Search Products:" type="text" />
 							<button className="box-shadow--2dp">Go</button>
@@ -70,21 +72,33 @@ module.exports = React.createClass({
 						{postElements}
 					</div>
 				</div>
+				
 			</div>
 			)
 		
 	},
 	onItemAdded: function(model){
-		console.log(model.id);
-		console.log(this.props.listId);
+		
 		var list= new ListModel();
 		this.setState({
 			listItems: this.state.listItems+','+model.id
-		},()=>{
+		}
+		,()=>{
 			list.set('objectId', this.props.listId);
 			list.set('products', this.state.listItems);
 			list.save();
-		})
+		}
+		);
+	},
+	listQuery: function(){
+		listQuery.get(this.props.listId).then(
+			(list) =>{
+				return list.fetch();
+
+			}).then((result)=>{
+				console.log(result.id);
+				this.setState({currentList: result});
+			});
 	}
 	
 });
