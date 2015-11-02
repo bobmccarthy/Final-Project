@@ -13,30 +13,57 @@ body{
 	height: 100%;
 }
 .top-navbar{
-	background-color: #CEE2E9;
-	padding: 1em 1em;
-	overflow: hidden;
+	background-color: #707070;//the grey
+	// padding: 1em 1em;
+	// overflow: hidden;
 	a{
-		font-size: 1.5em;
+		color: white;
+		font-size: 1em;
 		text-decoration: none;
 		margin-left: 1em;
 	}
+	#navBtn{
+		font-size: 1.5em;
+		padding: 0.5em;
+	}
+	.rightBtn{
+		padding: 0.5em;
+	}
+	.active{
+		background-color: #F79227;//the orange
+	}
 }
 .bottom-navbar{
-	background-color: #CEE2E9;
-	button{
-		margin-right: 1em;
+	text-align: center;
+	.storeLogo{
+		background-color: red;
+		color: white;
+		padding: 2em;
+	}
+	.searches{
+		// background-color: #ECECEC; //light grey
 	}
 	p{
-		display: inline;
+		font-size: 1.2em;
+		margin-top: 0.75em;
+		margin-bottom: 0;
 	}
-	overflow: hidden;
-	text-align: center;
-	select{
-		font-size: 1.5em;
-		margin: 0.5em 0.5em;
-		width: 20%;
-		border-style: none;
+	input{
+		margin-top: 1em;
+	}
+	button{
+		margin-left: 0.5em;
+	}
+	#myLists{
+		background-image: url('../images/down-arrow.png');
+		height: 2em;
+	}
+}
+.homeImg{
+	img{
+		width: 60%;
+		margin-left: 20%;
+		margin-top: 3em;
 	}
 }
 .right{

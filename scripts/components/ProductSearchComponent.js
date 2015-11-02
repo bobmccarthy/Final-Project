@@ -50,11 +50,20 @@ module.exports = React.createClass({
 		})
 		return(
 			<div>
-				<div className="bottom-navbar">
-					<input type="text" />
-					<button>Go</button>
-					<p>Current List:</p>
-					{listDropdown}
+				<div className="bottom-navbar row box-shadow--2dp">
+					<div className="storeLogo col-xs-6 box-shadow--2dp">
+						<h2>H-E-B Logo</h2>
+					</div>
+					<div className="col-xs-6 row searches">
+						<div className="col-xs-12">
+							<p>Add To List:</p>
+							{listDropdown}
+						</div>
+						<div className="col-xs-12">
+							<input className="box-shadow--2dp" placeholder="Search Products:" type="text" />
+							<button className="box-shadow--2dp">Go</button>
+						</div>
+					</div>
 				</div>
 				<div className="container-fluid listContainer">
 					<div className="row">

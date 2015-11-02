@@ -12,17 +12,19 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		var navChange = [];
-		var bottomNavBar=[];
+		var currentPage = Backbone.history.getFragment();
+		var subUrl = currentPage.substring(0,13)
 		
 		if (!Parse.User.current()){
-			navChange.push(<a key="a" className="right" href="#login">Login</a>);
+			navChange.push(<a key="a" className="right rightBtn" href="#login">Login</a>);
 		}
 
 		else{
-			navChange.push(<a key="b" className="right" href="#logout" onClick={this.logout}>logout</a>);
-			navChange.push(<a key="c" className="right" href="#profile">{Parse.User.current().get('username')}`s Profile</a>);
-			navChange.push(<a key="e" className="right" href="#productSearch">Product Search</a>);
-			navChange.push(<a key="f" className="right" href="#myLists">My List</a>);
+			navChange.push(<a key="b" className="right rightBtn" href="#logout" onClick={this.logout}>logout</a>);
+			navChange.push(<a key="c" className={currentPage === 'profile' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#profile">{Parse.User.current().get('username')}`s Profile</a>);
+			navChange.push(<a key="f" className={currentPage === 'myLists' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#myLists">My Lists</a>);
+			navChange.push(<a key="e" className={subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#productSearch">Product Picker</a>);
+			
 			
 		}				
 		return(
@@ -37,7 +39,7 @@ module.exports = React.createClass({
 					</form>
 				</div>
 				<div className="top-navbar">
-					<a href="#">G-List</a>
+					<a id="navBtn" className={currentPage === '' ? 'active box-shadow--2dp' : ''} href="#">G-List</a>
 					{navChange}
 				</div>
 				
@@ -71,12 +73,5 @@ module.exports = React.createClass({
 		Parse.User.logOut();
 		this.props.router.navigate('#logout', {trigger: true})
 	}
-// <select>
-// 	<option>Your Store</option>
-// 	<option>Your Store</option>
-// 	<option>Your Store</option>
-// 	<option>Your Store</option>
-// </select>
-	// 
-// {bottomNavBar}
+
 });

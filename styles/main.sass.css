@@ -12,27 +12,42 @@ body {
   height: 100%; }
 
 .top-navbar {
-  background-color: #CEE2E9;
-  padding: 1em 1em;
-  overflow: hidden; }
+  background-color: #707070; }
   .top-navbar a {
-    font-size: 1.5em;
+    color: white;
+    font-size: 1em;
     text-decoration: none;
     margin-left: 1em; }
+  .top-navbar #navBtn {
+    font-size: 1.5em;
+    padding: 0.5em; }
+  .top-navbar .rightBtn {
+    padding: 0.5em; }
+  .top-navbar .active {
+    background-color: #F79227; }
 
 .bottom-navbar {
-  background-color: #CEE2E9;
-  overflow: hidden;
   text-align: center; }
-  .bottom-navbar button {
-    margin-right: 1em; }
+  .bottom-navbar .storeLogo {
+    background-color: red;
+    color: white;
+    padding: 2em; }
   .bottom-navbar p {
-    display: inline; }
-  .bottom-navbar select {
-    font-size: 1.5em;
-    margin: 0.5em 0.5em;
-    width: 20%;
-    border-style: none; }
+    font-size: 1.2em;
+    margin-top: 0.75em;
+    margin-bottom: 0; }
+  .bottom-navbar input {
+    margin-top: 1em; }
+  .bottom-navbar button {
+    margin-left: 0.5em; }
+  .bottom-navbar #myLists {
+    background-image: url("../images/down-arrow.png");
+    height: 2em; }
+
+.homeImg img {
+  width: 60%;
+  margin-left: 20%;
+  margin-top: 3em; }
 
 .right {
   float: right; }

@@ -23,7 +23,7 @@ module.exports = React.createClass({
 	render: function() {
 		var y = this.state.item.map((item)=>{
 			return (
-				<div>
+				<div className="listItemDeets">
 					<div>{item.get('name')}</div>
 					<div>{item.get('price')}</div>
 				</div>

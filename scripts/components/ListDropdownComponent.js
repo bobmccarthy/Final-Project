@@ -23,7 +23,7 @@ module.exports = React.createClass({
 			)
 		})
 		return (
-			<select id="myLists" onChange={this.change}>
+			<select id="myLists" className="box-shadow--2dp" onChange={this.change}>
 				{listy}
 			</select>
 			)

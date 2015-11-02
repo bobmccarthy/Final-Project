@@ -5,7 +5,9 @@ var Backbone = require('backbone');
 module.exports = React.createClass({
 	render: function() {
 		return(
-			<h1>Home</h1>
+			<div className="homeImg">
+				<img src="http://cdn1.theodysseyonline.com/files/2015/06/15/6356992660350286962015667767_1328830480789_3599975.png"/>
+			</div>
 		)
 	}
 });

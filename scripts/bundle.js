@@ -34141,9 +34141,9 @@ module.exports = React.createClass({
 
 	render: function render() {
 		return React.createElement(
-			'h1',
-			null,
-			'Home'
+			'div',
+			{ className: 'homeImg' },
+			React.createElement('img', { src: 'http://cdn1.theodysseyonline.com/files/2015/06/15/6356992660350286962015667767_1328830480789_3599975.png' })
 		);
 	}
 });
@@ -34218,7 +34218,7 @@ module.exports = React.createClass({
 		});
 		return React.createElement(
 			'select',
-			{ id: 'myLists', onChange: this.change },
+			{ id: 'myLists', className: 'box-shadow--2dp', onChange: this.change },
 			listy
 		);
 	},
@@ -34301,35 +34301,36 @@ module.exports = React.createClass({
 	},
 	render: function render() {
 		var navChange = [];
-		var bottomNavBar = [];
+		var currentPage = Backbone.history.getFragment();
+		var subUrl = currentPage.substring(0, 13);
 
 		if (!Parse.User.current()) {
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'a', className: 'right', href: '#login' },
+				{ key: 'a', className: 'right rightBtn', href: '#login' },
 				'Login'
 			));
 		} else {
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'b', className: 'right', href: '#logout', onClick: this.logout },
+				{ key: 'b', className: 'right rightBtn', href: '#logout', onClick: this.logout },
 				'logout'
 			));
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'c', className: 'right', href: '#profile' },
+				{ key: 'c', className: currentPage === 'profile' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn', href: '#profile' },
 				Parse.User.current().get('username'),
 				'`s Profile'
 			));
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'e', className: 'right', href: '#productSearch' },
-				'Product Search'
+				{ key: 'f', className: currentPage === 'myLists' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn', href: '#myLists' },
+				'My Lists'
 			));
 			navChange.push(React.createElement(
 				'a',
-				{ key: 'f', className: 'right', href: '#myLists' },
-				'My List'
+				{ key: 'e', className: subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn', href: '#productSearch' },
+				'Product Picker'
 			));
 		}
 		return React.createElement(
@@ -34365,7 +34366,7 @@ module.exports = React.createClass({
 				{ className: 'top-navbar' },
 				React.createElement(
 					'a',
-					{ href: '#' },
+					{ id: 'navBtn', className: currentPage === '' ? 'active box-shadow--2dp' : '', href: '#' },
 					'G-List'
 				),
 				navChange
@@ -34396,14 +34397,7 @@ module.exports = React.createClass({
 		Parse.User.logOut();
 		this.props.router.navigate('#logout', { trigger: true });
 	}
-	// <select>
-	// 	<option>Your Store</option>
-	// 	<option>Your Store</option>
-	// 	<option>Your Store</option>
-	// 	<option>Your Store</option>
-	// </select>
-	//
-	// {bottomNavBar}
+
 });
 
 },{"backbone":1,"bootstrap":3,"react":173}],180:[function(require,module,exports){
@@ -34514,19 +34508,40 @@ module.exports = React.createClass({
 			null,
 			React.createElement(
 				'div',
-				{ className: 'bottom-navbar' },
-				React.createElement('input', { type: 'text' }),
+				{ className: 'bottom-navbar row box-shadow--2dp' },
 				React.createElement(
-					'button',
-					null,
-					'Go'
+					'div',
+					{ className: 'storeLogo col-xs-6 box-shadow--2dp' },
+					React.createElement(
+						'h2',
+						null,
+						'H-E-B Logo'
+					)
 				),
 				React.createElement(
-					'p',
-					null,
-					'Current List:'
-				),
-				listDropdown
+					'div',
+					{ className: 'col-xs-6 row searches' },
+					React.createElement(
+						'div',
+						{ className: 'col-xs-12' },
+						React.createElement(
+							'p',
+							null,
+							'Add To List:'
+						),
+						listDropdown
+					),
+					React.createElement(
+						'div',
+						{ className: 'col-xs-12' },
+						React.createElement('input', { className: 'box-shadow--2dp', placeholder: 'Search Products:', type: 'text' }),
+						React.createElement(
+							'button',
+							{ className: 'box-shadow--2dp' },
+							'Go'
+						)
+					)
+				)
 			),
 			React.createElement(
 				'div',
