@@ -29,7 +29,7 @@ module.exports = React.createClass({
 		var jibby = this.state.lists.map((list) => {
 			return (
 				
-				<div className="col-xs-7">
+				<div className="col-xs-12 col-sm-7">
 					<ListBoxComponent model={list} id={list.id}/>
 				</div>
 					

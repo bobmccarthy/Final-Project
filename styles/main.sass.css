@@ -42,7 +42,8 @@ body {
     text-decoration: none;
     display: inline; }
     .bottom-navbar .searches a button {
-      color: black; }
+      color: black;
+      border-style: none; }
   .bottom-navbar .searches .searchy {
     padding-top: 1.5em; }
   .bottom-navbar .searches .addList {
@@ -53,13 +54,21 @@ body {
     margin-top: 0.75em;
     margin-bottom: 0; }
   .bottom-navbar input {
+    border-style: none;
+    font-size: 1.5em;
     margin-top: 1em; }
   .bottom-navbar button {
-    margin-left: 1em; }
+    margin-left: 1em;
+    border-style: none;
+    height: 2em; }
   .bottom-navbar #myLists {
     background-image: url("../images/down-arrow.png");
     height: 2em;
     margin: .7em; }
+
+.listItemDeets input {
+  display: inline;
+  width: 2em; }
 
 .categoryTitle {
   text-align: left; }
@@ -91,7 +100,8 @@ body {
   .eachList button {
     float: right;
     background-color: #F79227;
-    color: white; }
+    color: white;
+    border-style: none; }
   .eachList .listContents {
     display: none; }
 
@@ -103,7 +113,8 @@ body {
   padding: 1em; }
   .listItems .addToCart {
     background-color: #F79227;
-    color: white; }
+    color: white;
+    border-style: none; }
   .listItems .button {
     margin-top: -1em;
     margin-right: -1em;
@@ -117,6 +128,7 @@ body {
     max-height: 20em; }
   .singleProduct .back {
     background-color: #F79227;
+    border-style: none;
     color: white;
     float: right; }
 
@@ -144,7 +156,8 @@ body {
       margin-top: 1em;
       height: 3.1em;
       background-color: #F79227;
-      color: white; }
+      color: white;
+      border-style: none; }
 
 .box-shadow--2dp {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }

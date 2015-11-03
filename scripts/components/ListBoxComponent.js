@@ -1,7 +1,10 @@
 var React = require('react');
 window.$ = require('jquery');
 window.jQuery = $;
+var ProductModel = require('../models/ProductModel');
 var EachProductComponent = require('./EachProductComponent');
+var productQuery = new Parse.Query(ProductModel);
+
 
 
 module.exports = React.createClass({
@@ -12,8 +15,9 @@ module.exports = React.createClass({
 	},
 	render: function() {
 
-		// console.log(this.state.products);
+		
 		var each = this.state.products.map((list) => {
+			
 			return (
 				<EachProductComponent model={list} />
 			)
@@ -24,7 +28,7 @@ module.exports = React.createClass({
 					<button onClick={this.expand}>See List</button>
 					<h2>{this.props.model.get('name')}</h2>
 					<h6>{this.props.model.get('createdAt').toString().substring(0,10)}</h6>
-					<div>Total: $</div>
+					<h4>Total: $</h4>
 					<section className="toggler" id={this.props.id}>
 						{each}
 					</section>

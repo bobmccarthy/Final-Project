@@ -34135,6 +34135,7 @@ module.exports = React.createClass({
 var React = require('react');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
+var $ = require('jquery');
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34160,16 +34161,23 @@ module.exports = React.createClass({
 		var y = this.state.item.map(function (item) {
 			return React.createElement(
 				'div',
-				{ className: 'listItemDeets' },
+				{ className: 'listItemDeets row' },
 				React.createElement(
 					'div',
-					null,
+					{ className: 'col-xs-4' },
 					item.get('name')
 				),
 				React.createElement(
 					'div',
-					null,
-					item.get('price')
+					{ className: 'col-xs-4' },
+					'Qty:',
+					React.createElement('input', { className: 'quantity', defaultValue: '1', type: 'number' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'col-xs-4' },
+					'$',
+					item.get('price').toFixed(2)
 				)
 			);
 		});
@@ -34182,7 +34190,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ProductModel":188,"react":173}],176:[function(require,module,exports){
+},{"../models/ProductModel":188,"jquery":17,"react":173}],176:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34247,7 +34255,9 @@ module.exports = React.createClass({
 var React = require('react');
 window.$ = require('jquery');
 window.jQuery = $;
+var ProductModel = require('../models/ProductModel');
 var EachProductComponent = require('./EachProductComponent');
+var productQuery = new Parse.Query(ProductModel);
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34259,8 +34269,8 @@ module.exports = React.createClass({
 	},
 	render: function render() {
 
-		// console.log(this.state.products);
 		var each = this.state.products.map(function (list) {
+
 			return React.createElement(EachProductComponent, { model: list });
 		});
 		return React.createElement(
@@ -34285,7 +34295,7 @@ module.exports = React.createClass({
 					this.props.model.get('createdAt').toString().substring(0, 10)
 				),
 				React.createElement(
-					'div',
+					'h4',
 					null,
 					'Total: $'
 				),
@@ -34303,7 +34313,7 @@ module.exports = React.createClass({
 
 });
 
-},{"./EachProductComponent":175,"jquery":17,"react":173}],179:[function(require,module,exports){
+},{"../models/ProductModel":188,"./EachProductComponent":175,"jquery":17,"react":173}],179:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34391,7 +34401,7 @@ module.exports = React.createClass({
 		var jibby = this.state.lists.map(function (list) {
 			return React.createElement(
 				'div',
-				{ className: 'col-xs-7' },
+				{ className: 'col-xs-12 col-sm-7' },
 				React.createElement(ListBoxComponent, { model: list, id: list.id })
 			);
 		});
