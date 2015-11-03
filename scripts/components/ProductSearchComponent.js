@@ -1,5 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
+var Backbone = require('backbone');
 
 var ListModel = require('../models/ListModel');
 var ProductModel = require('../models/ProductModel');
@@ -8,6 +9,7 @@ var listQuery = new Parse.Query(ListModel);
 
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent= require('./ListDropdownComponent');
+
 
 
 
@@ -29,16 +31,18 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function() {
 		this.props.router.on('route', () => {
-			this.setState({
-				listItems:[]
+			listQuery.equalTo('objectId', Backbone.history.getFragment().substring(14,24));
+			listQuery.find().then((list)=> {
+				list.map((list)=>{
+					this.setState({
+						listItems: list.get('products')
+					})
+				})
 			});
+
 		});
-		
-		// listQuery.include('products');
-		// listQuery.find().then((list)=> {
-		// 	// console.log(list);
-		// 	this.setState({currentList: list});
-		// });
+
+
 		productQuery.find().then((products) => {
 			this.setState({items: products});
 		});
@@ -67,8 +71,10 @@ module.exports = React.createClass({
 			this.setState({international: products});
 		});
 	},
+	
 	render: function() {
-		var listDropdown = <ListDropdownComponent router={this.props.router}/>
+		// console.log(this.state.listItems);
+		var listDropdown = <ListDropdownComponent callback={this.listChange} router={this.props.router}/>
 		var allElements = this.state.items.map((product) => {
 			return (
 				<ProductBoxComponent model={product} callback={this.onItemAdded} />
@@ -107,18 +113,18 @@ module.exports = React.createClass({
 		return(
 			<div>
 				<div className="bottom-navbar row box-shadow--2dp">
-					<div className="storeLogo col-xs-6 box-shadow--2dp">
-						<h2>H-E-B Logo</h2>
+					<div className="storeLogo col-xs-12 col-sm-4 box-shadow--2dp">
+						<h2>FreshMarket</h2>
 					</div>
-					<div className="col-xs-6 row searches">
-						<div className="col-xs-12">
-							<p>Add To List:</p>
+					<div className="col-xs-12 col-sm-8 row searches">
+						<div className="col-xs-6">
+							<p>Add Items To List:</p>
 							{listDropdown}
 							<p className="or"> or </p>
-							<a href="#newList"><button className="box-shadow--2dp">Add New</button></a>
+							<a href="#addList"><button className="box-shadow--2dp addList">Add List</button></a>
 						</div>
 
-						<div className="col-xs-12">
+						<div className="col-xs-6 searchy">
 							<input className="box-shadow--2dp" placeholder="Search Products:" type="text" />
 							<button className="box-shadow--2dp">Go</button>
 						</div>
@@ -167,16 +173,6 @@ module.exports = React.createClass({
 			list.save();
 		}
 		);
-	},
-	listQuery: function(){
-		listQuery.get(this.props.listId).then(
-			(list) =>{
-				return list.fetch();
-
-			}).then((result)=>{
-				console.log(result.id);
-				this.setState({currentList: result});
-			});
 	}
 	
 });

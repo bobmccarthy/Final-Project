@@ -47,7 +47,7 @@ module.exports = React.createClass({
 			navChange.push(<a key="b" className="right rightBtn" href="#logout" onClick={this.logout}>logout</a>);
 			navChange.push(<a key="c" className={currentPage === 'profile' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#profile">{Parse.User.current().get('username')}`s Profile</a>);
 			navChange.push(<a key="f" className={currentPage === 'myLists' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#myLists">My Lists</a>);
-			navChange.push(<a key="e" className={subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href={'#productSearch/'+this.state.selectedList}>Product Picker</a>);
+			navChange.push(<a key="e" id="proBtn" className={subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href={'#productSearch/'+this.state.selectedList}>Product Picker</a>);
 			
 			
 		}				

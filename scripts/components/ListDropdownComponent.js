@@ -1,5 +1,6 @@
 var React = require('react');
 var $ = require('jquery');
+var Backbone = require('backbone');
 var ListModel = require('../models/ListModel');
 var listQuery = new Parse.Query(ListModel);
 
@@ -18,9 +19,17 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		var listy = this.state.lists.map(function(list){
-			return (
-				<option value={list.id}>{list.get('name')}</option>
-			)
+			if (Backbone.history.getFragment().substring(14,24)==list.id){
+				return (
+					<option selected="selected" value={list.id}>{list.get('name')}</option>
+				)
+			}
+			else{
+				return (
+					<option value={list.id}>{list.get('name')}</option>
+				)
+			}
+			
 		})
 		return (
 			<select id="myLists" className="box-shadow--2dp" onChange={this.change}>

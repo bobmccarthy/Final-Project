@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  margin-top: 2.4em; }
+  margin-top: 3em; }
 
 #login {
   z-index: 900;
@@ -16,23 +16,26 @@ body {
   background-color: #707070; }
   .top-navbar a {
     color: white;
-    font-size: 1em;
+    font-size: 1.25em;
     text-decoration: none;
     margin-left: 1em; }
   .top-navbar #navBtn {
-    font-size: 1.5em;
+    font-size: 2em;
     padding: 0.5em; }
   .top-navbar .rightBtn {
     padding: 0.5em; }
   .top-navbar .active {
     background-color: #F79227; }
+  .top-navbar #proBtn {
+    margin-left: 0; }
 
 .bottom-navbar {
   text-align: center; }
   .bottom-navbar .storeLogo {
-    background-color: red;
+    background-color: #186DF1;
     color: white;
-    padding: 2em; }
+    padding: 2em;
+    font-family: cursive; }
   .bottom-navbar .searches .or {
     display: inline; }
   .bottom-navbar .searches a {
@@ -40,23 +43,30 @@ body {
     display: inline; }
     .bottom-navbar .searches a button {
       color: black; }
+  .bottom-navbar .searches .searchy {
+    padding-top: 1.5em; }
+  .bottom-navbar .searches .addList {
+    background-color: #707070;
+    color: white; }
   .bottom-navbar p {
-    font-size: 1.2em;
+    font-size: 1.5em;
     margin-top: 0.75em;
     margin-bottom: 0; }
   .bottom-navbar input {
     margin-top: 1em; }
   .bottom-navbar button {
-    margin-left: 0.5em; }
+    margin-left: 1em; }
   .bottom-navbar #myLists {
     background-image: url("../images/down-arrow.png");
-    height: 2em; }
+    height: 2em;
+    margin: .7em; }
 
 .categoryTitle {
   text-align: left; }
 
 #checkMark {
-  height: 1em; }
+  height: 1em;
+  padding: 0 2em; }
 
 .homeImg img {
   width: 60%;
@@ -76,8 +86,12 @@ body {
 
 .eachList {
   padding: 1em; }
+  .eachList h2 {
+    margin-top: 0; }
   .eachList button {
-    float: right; }
+    float: right;
+    background-color: #F79227;
+    color: white; }
   .eachList .listContents {
     display: none; }
 
@@ -87,14 +101,50 @@ body {
 .listItems {
   height: 14em;
   padding: 1em; }
-  .listItems div {
+  .listItems .addToCart {
+    background-color: #F79227;
+    color: white; }
+  .listItems .button {
+    margin-top: -1em;
+    margin-right: -1em;
+    float: right; }
+
+.singleProduct {
+  width: 70%;
+  margin-left: 15%; }
+  .singleProduct .largeImg {
+    width: 70%;
+    max-height: 20em; }
+  .singleProduct .back {
+    background-color: #F79227;
+    color: white;
     float: right; }
 
 .toggler {
   display: none; }
 
 .itemPic {
+  margin-top: 1.2em;
+  margin-right: -4em;
   height: 5em; }
+
+.addList {
+  text-align: center; }
+  .addList .addListCont {
+    width: 40%;
+    margin: 2em 30%;
+    padding: 2em; }
+    .addList .addListCont h3 {
+      text-align: left; }
+    .addList .addListCont input {
+      font-size: 2em;
+      width: 100%; }
+    .addList .addListCont button {
+      display: block;
+      margin-top: 1em;
+      height: 3.1em;
+      background-color: #F79227;
+      color: white; }
 
 .box-shadow--2dp {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }

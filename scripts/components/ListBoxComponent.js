@@ -21,7 +21,7 @@ module.exports = React.createClass({
 		return (
 			<div className="box-shadow--3dp each">
 				<div className="eachList">
-					<button onClick={this.expand}>+</button>
+					<button onClick={this.expand}>See List</button>
 					<h2>{this.props.model.get('name')}</h2>
 					<h6>{this.props.model.get('createdAt').toString().substring(0,10)}</h6>
 					<div>Total: $</div>

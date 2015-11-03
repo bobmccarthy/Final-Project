@@ -13,7 +13,8 @@ var HomeComponent = require('./components/HomeComponent');
 var ProductSearchComponent = require('./components/ProductSearchComponent');
 var ProfileComponent = require('./components/ProfileComponent');
 var MyListsComponent = require('./components/MyListsComponent');
-
+var ItemDetailsComponent = require('./components/ItemDetailsComponent');
+var AddListComponent = require('./components/AddListComponent');
 
 $(document).on('ready', function(){
 	var Router = Backbone.Router.extend({
@@ -23,7 +24,9 @@ $(document).on('ready', function(){
 			'logout': 'home',
 			'productSearch(/:id)': 'productSearch',
 			'profile': 'profile',
-			'myLists': 'myLists'
+			'myLists': 'myLists',
+			'details/:id': 'details',
+			'addList': 'addList'
 		},
 		home: function() {
 			$('#login').hide();
@@ -43,6 +46,14 @@ $(document).on('ready', function(){
 		},
 		myLists: function(){
 			ReactDOM.render(<MyListsComponent router={r} />,
+			document.getElementById('main'));
+		},
+		details: function(id){
+			ReactDOM.render(<ItemDetailsComponent router={r} itemId={id}/>,
+			document.getElementById('main'));
+		},
+		addList: function(){
+			ReactDOM.render(<AddListComponent router={r} />,
 			document.getElementById('main'));
 		}
 	});

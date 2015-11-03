@@ -1,39 +1,36 @@
 var React = require('react');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
+var SingleProductBoxComponent = require('./SingleProductBoxComponent');
 
 
 module.exports = React.createClass({
 	getInitialState: function(){
 		return{
-			product: this.props.model,
+			itemId: this.props.itemId,
 			item: []
 		}
 	},
 	componentWillMount: function(){
-		// console.log(this.state.product);
-		productQuery.contains('objectId', this.state.product);
+		productQuery.equalTo('objectId', this.state.itemId);
 		productQuery.find().then((product) => {
-			this.setState({
-				item: product
-			})
+			this.setState({item: product});
 		});
-
 	},
+	
 	render: function() {
-		var y = this.state.item.map((item)=>{
+
+		var singleProduct = this.state.item.map((product) => {
 			return (
-				<div className="listItemDeets">
-					<div>{item.get('name')}</div>
-					<div>{item.get('price')}</div>
-				</div>
-				)
+				<SingleProductBoxComponent model={product} />
+			);
 		})
 		return (
-			<div>
-				{y}
+			<div className="container-fluid">
+				{singleProduct}
 			</div>
 		)
+
 	}
 	
 });
