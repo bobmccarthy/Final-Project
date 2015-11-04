@@ -10,7 +10,8 @@ module.exports = React.createClass({
 				
 				<img className="largeImg" src={this.props.model.get('urlPic')}/>
 				<h2>{this.props.model.get('name')}</h2>
-				<h4>{this.props.model.get('price')}/{this.props.model.get('priceCategory')}</h4>
+				<h4>${this.props.model.get('price')}/{this.props.model.get('priceCategory')}</h4>
+				<p className="ingredientsP" >Ingredients:</p>
 				<p>{this.props.model.get('ingredients')}</p>
 				<button className="box-shadow--2dp back" onClick={this.back}>Back to Search</button>
 				

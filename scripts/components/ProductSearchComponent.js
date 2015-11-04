@@ -113,19 +113,19 @@ module.exports = React.createClass({
 			<div>
 				<div className="bottom-navbar row box-shadow--2dp">
 					<div className="storeLogo col-xs-12 col-sm-4 box-shadow--2dp">
-						<h2>FreshMarket</h2>
+						<h2>FreshMarketFoos</h2>
 					</div>
 					<div className="col-xs-12 col-sm-8 row searches">
 						<div className="col-xs-6">
 							<p>Add Items To List:</p>
 							{listDropdown}
 							<p className="or"> or </p>
-							<a href="#addList"><button className="box-shadow--2dp addList">Add List</button></a>
+							<a href="#addList"><button className="box-shadow--2dp adList">Create New List</button></a>
 						</div>
 
 						<div className="col-xs-6 searchy">
-							<input className="box-shadow--2dp" placeholder="Search Products:" type="text" />
-							<button className="box-shadow--2dp">Go</button>
+							<input className="box-shadow--4dp" placeholder="Search Products:" type="text" />
+							
 						</div>
 					</div>
 				</div>
@@ -173,5 +173,5 @@ module.exports = React.createClass({
 		}
 		);
 	}
-	
+	// <button className="box-shadow--2dp go">Go</button>
 });

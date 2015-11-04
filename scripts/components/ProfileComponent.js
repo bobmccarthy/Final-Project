@@ -19,37 +19,22 @@ module.exports = React.createClass({
 		// 	return <div>loading</div>;
 		// }
 		return (
-			<div className="container">
+			<div className="container-fluid">
+				<h1>Personal Info:</h1>
 				<div className="row">
-					<form className="col-xs-12" onSubmit={this.onRegister}>
-						<h3>Personal Info:</h3>
-						<div className="row">
-							<div className="input-field col-xs-12">
-								<div>User Name</div>
-								<input type="text" ref="name" className="validate" id="reg_name" defaultValue={Parse.User.current().get('username')}/>
-								
-							</div>
-					
-							<div className="input-field col-xs-12">
-								<div>Email Address</div>
-								<input type="text" ref="email" className="validate" id="email_address" defaultValue={Parse.User.current().get('email')}/>
-								
-							</div>
-						</div>
-						<div className="row">
-							<div className="input-field col-xs-12">
-								<div>Things To Stay Away From:</div>
-								<input type="text" ref="diet" defaultValue={Parse.User.current().get('diet')}/>
-							</div>
-						</div>
-						<button>Save Changes</button>
-					</form>
-					
-					<button id="cancelBtn" onClick={this.cancel} className="waves-effect waves-light btn">Cancel</button>
-					
-					
+					<div className="infoForm col-xs-8 col-xs-offset-2 box-shadow--4dp">
+						<form  onSubmit={this.onRegister} className="row">
+							<div className="not">User Name</div>
+							<input type="text" ref="name" className="validate" id="reg_name" defaultValue={Parse.User.current().get('username')}/>
+							<div>Email Address</div>
+							<input type="text" ref="email" className="validate" id="email_address" defaultValue={Parse.User.current().get('email')}/>
+							<div>Things To Stay Away From:</div>
+							<input type="text" ref="diet" defaultValue={Parse.User.current().get('diet')}/>
+							<button>Save Changes</button>
+						</form>
+						<button id="cancelBtn" onClick={this.cancel} className="waves-effect waves-light btn">Cancel</button>
+					</div>
 				</div>
-
 			</div>
 		);
 	},

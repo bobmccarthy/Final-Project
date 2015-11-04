@@ -21,7 +21,7 @@ module.exports = React.createClass({
 	componentWillMount: function(){
 		listQuery.find().then((lists) => {
 			// console.log(lists);
-			this.setState({lists: lists});
+			this.setState({lists: lists.reverse()});
 		});
 	},
 	render: function() {
@@ -37,6 +37,7 @@ module.exports = React.createClass({
 		})
 		return(
 			<div className="container-fluid">
+				<h1>Your Current Grocery Lists:</h1>
 				<div className="row">
 					{jibby}
 				</div>

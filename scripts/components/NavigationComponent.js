@@ -44,7 +44,7 @@ module.exports = React.createClass({
 		}
 
 		else{
-			navChange.push(<a key="b" className="right rightBtn" href="#logout" onClick={this.logout}>logout</a>);
+			navChange.push(<a key="b" className="right rightBtn" href="#logout" onClick={this.logout}>Logout</a>);
 			navChange.push(<a key="c" className={currentPage === 'profile' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#profile">{Parse.User.current().get('username')}`s Profile</a>);
 			navChange.push(<a key="f" className={currentPage === 'myLists' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href="#myLists">My Lists</a>);
 			navChange.push(<a key="e" id="proBtn" className={subUrl === 'productSearch' ? 'active right rightBtn box-shadow--2dp' : 'right rightBtn'} href={'#productSearch/'+this.state.selectedList}>Product Picker</a>);
@@ -63,7 +63,8 @@ module.exports = React.createClass({
 					</form>
 				</div>
 				<div className="top-navbar navbar-fixed-top">
-					<a id="navBtn" className={currentPage === '' ? 'active box-shadow--2dp' : ''} href="#">G-List</a>
+					<img src="../../images/scroll4.png"/>
+					<a className="navBtn" href="#">G<span className="spam">ist</span></a>
 					{navChange}
 				</div>
 				

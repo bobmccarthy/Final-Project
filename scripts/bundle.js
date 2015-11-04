@@ -34393,7 +34393,7 @@ module.exports = React.createClass({
 
 		listQuery.find().then(function (lists) {
 			// console.log(lists);
-			_this.setState({ lists: lists });
+			_this.setState({ lists: lists.reverse() });
 		});
 	},
 	render: function render() {
@@ -34408,6 +34408,11 @@ module.exports = React.createClass({
 		return React.createElement(
 			'div',
 			{ className: 'container-fluid' },
+			React.createElement(
+				'h1',
+				null,
+				'Your Current Grocery Lists:'
+			),
 			React.createElement(
 				'div',
 				{ className: 'row' },
@@ -34473,7 +34478,7 @@ module.exports = React.createClass({
 			navChange.push(React.createElement(
 				'a',
 				{ key: 'b', className: 'right rightBtn', href: '#logout', onClick: this.logout },
-				'logout'
+				'Logout'
 			));
 			navChange.push(React.createElement(
 				'a',
@@ -34523,10 +34528,16 @@ module.exports = React.createClass({
 			React.createElement(
 				'div',
 				{ className: 'top-navbar navbar-fixed-top' },
+				React.createElement('img', { src: '../../images/scroll4.png' }),
 				React.createElement(
 					'a',
-					{ id: 'navBtn', className: currentPage === '' ? 'active box-shadow--2dp' : '', href: '#' },
-					'G-List'
+					{ className: 'navBtn', href: '#' },
+					'G',
+					React.createElement(
+						'span',
+						{ className: 'spam' },
+						'ist'
+					)
 				),
 				navChange
 			)
@@ -34580,7 +34591,12 @@ module.exports = React.createClass({
 					React.createElement(
 						"button",
 						{ className: "box-shadow--2dp addToCart", onClick: this.itemAdded },
-						"+ To Cart"
+						React.createElement(
+							"strong",
+							null,
+							"+"
+						),
+						" To Cart"
 					)
 				),
 				React.createElement(
@@ -34595,6 +34611,7 @@ module.exports = React.createClass({
 					React.createElement(
 						"p",
 						null,
+						"$",
 						this.props.model.get('price'),
 						"/",
 						this.props.model.get('priceCategory')
@@ -34725,7 +34742,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'h2',
 						null,
-						'FreshMarket'
+						'FreshMarketFoos'
 					)
 				),
 				React.createElement(
@@ -34750,20 +34767,15 @@ module.exports = React.createClass({
 							{ href: '#addList' },
 							React.createElement(
 								'button',
-								{ className: 'box-shadow--2dp addList' },
-								'Add List'
+								{ className: 'box-shadow--2dp adList' },
+								'Create New List'
 							)
 						)
 					),
 					React.createElement(
 						'div',
 						{ className: 'col-xs-6 searchy' },
-						React.createElement('input', { className: 'box-shadow--2dp', placeholder: 'Search Products:', type: 'text' }),
-						React.createElement(
-							'button',
-							{ className: 'box-shadow--2dp' },
-							'Go'
-						)
+						React.createElement('input', { className: 'box-shadow--4dp', placeholder: 'Search Products:', type: 'text' })
 					)
 				)
 			),
@@ -34846,7 +34858,7 @@ module.exports = React.createClass({
 			list.save();
 		});
 	}
-
+	// <button className="box-shadow--2dp go">Go</button>
 });
 
 },{"../models/ListModel":187,"../models/ProductModel":188,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
@@ -34876,66 +34888,50 @@ module.exports = React.createClass({
 		// }
 		return React.createElement(
 			'div',
-			{ className: 'container' },
+			{ className: 'container-fluid' },
+			React.createElement(
+				'h1',
+				null,
+				'Personal Info:'
+			),
 			React.createElement(
 				'div',
 				{ className: 'row' },
 				React.createElement(
-					'form',
-					{ className: 'col-xs-12', onSubmit: this.onRegister },
+					'div',
+					{ className: 'infoForm col-xs-8 col-xs-offset-2 box-shadow--4dp' },
 					React.createElement(
-						'h3',
-						null,
-						'Personal Info:'
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
+						'form',
+						{ onSubmit: this.onRegister, className: 'row' },
 						React.createElement(
 							'div',
-							{ className: 'input-field col-xs-12' },
-							React.createElement(
-								'div',
-								null,
-								'User Name'
-							),
-							React.createElement('input', { type: 'text', ref: 'name', className: 'validate', id: 'reg_name', defaultValue: Parse.User.current().get('username') })
+							{ className: 'not' },
+							'User Name'
 						),
+						React.createElement('input', { type: 'text', ref: 'name', className: 'validate', id: 'reg_name', defaultValue: Parse.User.current().get('username') }),
 						React.createElement(
 							'div',
-							{ className: 'input-field col-xs-12' },
-							React.createElement(
-								'div',
-								null,
-								'Email Address'
-							),
-							React.createElement('input', { type: 'text', ref: 'email', className: 'validate', id: 'email_address', defaultValue: Parse.User.current().get('email') })
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'row' },
+							null,
+							'Email Address'
+						),
+						React.createElement('input', { type: 'text', ref: 'email', className: 'validate', id: 'email_address', defaultValue: Parse.User.current().get('email') }),
 						React.createElement(
 							'div',
-							{ className: 'input-field col-xs-12' },
-							React.createElement(
-								'div',
-								null,
-								'Things To Stay Away From:'
-							),
-							React.createElement('input', { type: 'text', ref: 'diet', defaultValue: Parse.User.current().get('diet') })
+							null,
+							'Things To Stay Away From:'
+						),
+						React.createElement('input', { type: 'text', ref: 'diet', defaultValue: Parse.User.current().get('diet') }),
+						React.createElement(
+							'button',
+							null,
+							'Save Changes'
 						)
 					),
 					React.createElement(
 						'button',
-						null,
-						'Save Changes'
+						{ id: 'cancelBtn', onClick: this.cancel, className: 'waves-effect waves-light btn' },
+						'Cancel'
 					)
-				),
-				React.createElement(
-					'button',
-					{ id: 'cancelBtn', onClick: this.cancel, className: 'waves-effect waves-light btn' },
-					'Cancel'
 				)
 			)
 		);
@@ -34985,9 +34981,15 @@ module.exports = React.createClass({
 			React.createElement(
 				"h4",
 				null,
+				"$",
 				this.props.model.get('price'),
 				"/",
 				this.props.model.get('priceCategory')
+			),
+			React.createElement(
+				"p",
+				{ className: "ingredientsP" },
+				"Ingredients:"
 			),
 			React.createElement(
 				"p",
