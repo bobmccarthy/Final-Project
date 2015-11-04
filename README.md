@@ -14,3 +14,6 @@ At the conclusion of the user generating a grocery list, the app will text the s
 
 
 Link to my Trello Board - https://trello.com/b/yYJQfot8/final-project
+
+##Data Models
+Look in my images folder of this project
