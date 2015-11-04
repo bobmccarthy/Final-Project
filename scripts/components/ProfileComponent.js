@@ -29,7 +29,7 @@ module.exports = React.createClass({
 							<div>Email Address</div>
 							<input type="text" ref="email" className="validate" id="email_address" defaultValue={Parse.User.current().get('email')}/>
 							<div>Things To Stay Away From:</div>
-							<input type="text" ref="diet" defaultValue={Parse.User.current().get('diet')}/>
+							<input type="text" ref="diet" defaultValue={Parse.User.current().get('dietArray')}/>
 							<button>Save Changes</button>
 						</form>
 						<button id="cancelBtn" onClick={this.cancel} className="waves-effect waves-light btn">Cancel</button>
@@ -40,22 +40,24 @@ module.exports = React.createClass({
 	},
 	onRegister: function(e) {
 		e.preventDefault();
+		var dietArray2 = this.refs.diet.value.split(',');
+		console.log(dietArray2);
 		
 		var user = Parse.User.current();
 		user.save({
 			username: this.refs.name.value,
 			email: this.refs.email.value,
-			diet: this.refs.diet.value
+			dietArray: dietArray2
 		},
 		{
 			success: (u) => {
 				window.localStorage.setItem('Parse/p5pjOUCZjobYEd8rUofEo9IkLessjDxRUsUtvp16/currentUser', JSON.stringify(u.toJSON()))
-				this.props.router.navigate('productSearch', {trigger: true});
+				window.history.back();
 			}
 		});
 	},
 	cancel: function(){
-		this.props.router.navigate('productSearch', {trigger: true});
+		window.history.back();
 	}
 
 });

@@ -73,7 +73,7 @@ module.exports = React.createClass({
 	},
 	login: function(e){
 		e.preventDefault();
-		var user = new Parse.User();
+		// var user = new Parse.User();
 		Parse.User.logIn(
 			this.refs.username.value,
 			this.refs.password.value,

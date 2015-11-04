@@ -34547,7 +34547,7 @@ module.exports = React.createClass({
 		var _this2 = this;
 
 		e.preventDefault();
-		var user = new Parse.User();
+		// var user = new Parse.User();
 		Parse.User.logIn(this.refs.username.value, this.refs.password.value, {
 			success: function success(u) {
 				_this2.forceUpdate();
@@ -34674,15 +34674,20 @@ module.exports = React.createClass({
 				});
 			});
 		});
+		// var diet = Parse.User.current().get('diet').split(',')[2];
+		// console.log(diet);
+		var dietArray = Parse.User.current().get('dietArray');
 
 		productQuery.find().then(function (products) {
 			_this.setState({ items: products });
 		});
 		productQuery.equalTo('category', 'produce');
+		productQuery.notContainedIn('ingredients', dietArray);
 		productQuery.find().then(function (products) {
 			_this.setState({ produce: products });
 		});
 		productQuery.equalTo('category', 'breads');
+		productQuery.notContainedIn('ingredientArray', dietArray);
 		productQuery.find().then(function (products) {
 			_this.setState({ breads: products });
 		});
@@ -34920,7 +34925,7 @@ module.exports = React.createClass({
 							null,
 							'Things To Stay Away From:'
 						),
-						React.createElement('input', { type: 'text', ref: 'diet', defaultValue: Parse.User.current().get('diet') }),
+						React.createElement('input', { type: 'text', ref: 'diet', defaultValue: Parse.User.current().get('dietArray') }),
 						React.createElement(
 							'button',
 							null,
@@ -34937,24 +34942,24 @@ module.exports = React.createClass({
 		);
 	},
 	onRegister: function onRegister(e) {
-		var _this = this;
-
 		e.preventDefault();
+		var dietArray2 = this.refs.diet.value.split(',');
+		console.log(dietArray2);
 
 		var user = Parse.User.current();
 		user.save({
 			username: this.refs.name.value,
 			email: this.refs.email.value,
-			diet: this.refs.diet.value
+			dietArray: dietArray2
 		}, {
 			success: function success(u) {
 				window.localStorage.setItem('Parse/p5pjOUCZjobYEd8rUofEo9IkLessjDxRUsUtvp16/currentUser', JSON.stringify(u.toJSON()));
-				_this.props.router.navigate('productSearch', { trigger: true });
+				window.history.back();
 			}
 		});
 	},
 	cancel: function cancel() {
-		this.props.router.navigate('productSearch', { trigger: true });
+		window.history.back();
 	}
 
 });

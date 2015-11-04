@@ -75,7 +75,6 @@ body{
 		}
 		.searchy{
 			padding-top: 1.5em;
-			
 		}
 		.adList{
 			background-color: #707070;
@@ -93,14 +92,6 @@ body{
 		margin-top: 1em;
 	}
 
-	// .go{
-	// 	margin-left: 1em;
-	// 	margin-top: 1em;
-	// 	border-style: none;
-	// 	height: 2em;
-	// 	background-color: #707070;
-	// 	color: white;
-	// }
 	#myLists{
 		background-image: url('../images/down-arrow.png');
 		height: 2em;
@@ -217,7 +208,7 @@ body{
 			display: block;
 			margin-top: 1em;
 			height: 3.1em;
-			// background-color: #F79227;
+			background-color: #F79227;
 			color: white;
 			border-style: none;
 		}
@@ -226,6 +217,10 @@ body{
 
 }
 .infoForm{
+	#cancelBtn{
+		float: right;
+		margin-bottom: 0.5em;
+	}
 	form{
 		padding: 1em;
 		div{
@@ -234,6 +229,12 @@ body{
 		}
 		.not{
 			padding-top: 0;
+		}
+		button{
+			background-color: #F79227;
+			color: white;
+			margin-top: 1em;
+			display: block;
 		}
 	}
 }

@@ -165,8 +165,13 @@ body {
       display: block;
       margin-top: 1em;
       height: 3.1em;
+      background-color: #F79227;
       color: white;
       border-style: none; }
+
+.infoForm #cancelBtn {
+  float: right;
+  margin-bottom: 0.5em; }
 
 .infoForm form {
   padding: 1em; }
@@ -175,6 +180,11 @@ body {
     padding-bottom: 1em; }
   .infoForm form .not {
     padding-top: 0; }
+  .infoForm form button {
+    background-color: #F79227;
+    color: white;
+    margin-top: 1em;
+    display: block; }
 
 @media screen and (min-width: 48em) {
   .infoForm {

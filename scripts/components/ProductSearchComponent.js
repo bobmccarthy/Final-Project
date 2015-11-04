@@ -40,16 +40,20 @@ module.exports = React.createClass({
 				})
 			});
 		});
-
+		// var diet = Parse.User.current().get('diet').split(',')[2];
+		// console.log(diet);
+		var dietArray=Parse.User.current().get('dietArray');
 
 		productQuery.find().then((products) => {
 			this.setState({items: products});
 		});
 		productQuery.equalTo('category', 'produce');
+		productQuery.notContainedIn('ingredients', dietArray);
 		productQuery.find().then((products) => {
 			this.setState({produce: products});
 		});
 		productQuery.equalTo('category', 'breads');
+		productQuery.notContainedIn('ingredientArray', dietArray);
 		productQuery.find().then((products) => {
 			this.setState({breads: products});
 		});
