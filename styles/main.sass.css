@@ -8,9 +8,22 @@ body {
   display: none;
   width: 100%;
   text-align: center;
-  padding: 3em;
+  padding: 10% 10%;
   background-color: rgba(0, 0, 0, 0.7);
   height: 100%; }
+  #login .loginWhite {
+    background-color: white;
+    border: 3px solid #F79227; }
+    #login .loginWhite .loginForm input {
+      border-style: none;
+      font-size: 2em; }
+    #login .loginWhite .loginForm button {
+      width: 40%;
+      height: 4em;
+      background-color: #F79227;
+      border-style: none;
+      display: block;
+      margin: 2em auto; }
 
 .top-navbar {
   background-color: #707070;
@@ -84,10 +97,23 @@ body {
   height: 1em;
   padding: 0 2em; }
 
-.homeImg img {
-  width: 60%;
-  margin-left: 20%;
-  margin-top: 3em; }
+.homeBkg .item {
+  margin-top: 1em; }
+  .homeBkg .item img {
+    height: 100%;
+    margin: 0 auto;
+    width: 60%; }
+
+.homeBkg h2 {
+  color: #F79227; }
+
+.homeBkg footer {
+  padding: 1em;
+  text-align: center;
+  background-color: #707070; }
+
+.homeBkg .description {
+  padding: 1em 2em; }
 
 .right {
   float: right; }
@@ -202,6 +228,10 @@ body {
     .infoForm #cancelBtn {
       float: right;
       margin-bottom: 0.5em; } }
+
+@media screen and (min-width: 62em) {
+  .homeBkg .item {
+    height: 37em; } }
 
 .box-shadow--2dp {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }

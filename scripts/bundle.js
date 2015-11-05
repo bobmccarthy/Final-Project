@@ -34203,11 +34203,114 @@ module.exports = React.createClass({
 	render: function render() {
 		return React.createElement(
 			'div',
-			{ className: 'homeImg' },
-			React.createElement('img', { src: 'http://cdn1.theodysseyonline.com/files/2015/06/15/6356992660350286962015667767_1328830480789_3599975.png' })
+			{ className: 'homeBkg' },
+			React.createElement(
+				'div',
+				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel' },
+				React.createElement(
+					'ol',
+					{ className: 'carousel-indicators' },
+					React.createElement('li', { 'data-target': '#carousel-example-generic', 'data-slide-to': '0', className: 'active' }),
+					React.createElement('li', { 'data-target': '#carousel-example-generic', 'data-slide-to': '1' }),
+					React.createElement('li', { 'data-target': '#carousel-example-generic', 'data-slide-to': '2' })
+				),
+				React.createElement(
+					'div',
+					{ className: 'carousel-inner' },
+					React.createElement(
+						'div',
+						{ className: 'item active' },
+						React.createElement('img', { src: '../../images/comp2.jpg', alt: '...' }),
+						React.createElement(
+							'div',
+							{ className: 'carousel-caption' },
+							React.createElement(
+								'h2',
+								null,
+								'Desktop Layout'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'item' },
+						React.createElement('img', { className: 'adjust', src: '../../images/phone.png', alt: '...' }),
+						React.createElement(
+							'div',
+							{ className: 'carousel-caption' },
+							React.createElement(
+								'h2',
+								null,
+								'Mobile Layout'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'item' },
+						React.createElement('img', { src: '../../images/prefs3.png', alt: '...' }),
+						React.createElement(
+							'div',
+							{ className: 'carousel-caption' },
+							React.createElement('h3', null)
+						)
+					)
+				),
+				React.createElement(
+					'a',
+					{ className: 'left carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'prev' },
+					React.createElement('span', { className: 'glyphicon glyphicon-chevron-left' })
+				),
+				React.createElement(
+					'a',
+					{ className: 'right carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'next' },
+					React.createElement('span', { className: 'glyphicon glyphicon-chevron-right' })
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'container-fluid' },
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					React.createElement(
+						'div',
+						{ className: 'col-xs-6 description box-shadow--2dp' },
+						React.createElement(
+							'h2',
+							null,
+							'Biulding the perfect Grocery list, every time.'
+						),
+						React.createElement(
+							'p',
+							null,
+							'One of the least pleasing parts of grocery shopping is having to come up with a list. Currently, we are lucky enough to know a lot about special diets, allergens, and healthy eating, but there is no easy way to find grocery products that fit your preferences and needs. ',
+							React.createElement(
+								'strong',
+								null,
+								'Gist'
+							),
+							' is an easy way to build the perfect grocery list that pertains to your needs.'
+						)
+					)
+				)
+			),
+			React.createElement(
+				'footer',
+				null,
+				React.createElement(
+					'p',
+					null,
+					'Gist, all rights reserved (eventually)'
+				)
+			)
 		);
 	}
 });
+// <div className="homeImg">
+// 					<img src="../../images/comp2.jpg"/>
+// 					<img src="../../images/phone.png"/>
+// 				</div>
 
 },{"backbone":1,"react":173}],177:[function(require,module,exports){
 'use strict';
@@ -34504,24 +34607,28 @@ module.exports = React.createClass({
 				'div',
 				{ id: 'login' },
 				React.createElement(
-					'form',
-					{ className: 'loginForm', onSubmit: this.login },
+					'div',
+					{ className: 'loginWhite' },
 					React.createElement(
-						'h3',
-						null,
-						'Username'
-					),
-					React.createElement('input', { type: 'text', ref: 'username' }),
-					React.createElement(
-						'h3',
-						null,
-						'Password'
-					),
-					React.createElement('input', { type: 'password', ref: 'password' }),
-					React.createElement(
-						'button',
-						null,
-						'Go!'
+						'form',
+						{ className: 'loginForm', onSubmit: this.login },
+						React.createElement(
+							'h2',
+							null,
+							'Username:'
+						),
+						React.createElement('input', { className: 'box-shadow--4dp', type: 'text', ref: 'username' }),
+						React.createElement(
+							'h2',
+							null,
+							'Password:'
+						),
+						React.createElement('input', { className: 'box-shadow--4dp', type: 'password', ref: 'password' }),
+						React.createElement(
+							'button',
+							{ className: 'box-shadow--4dp' },
+							'Go!'
+						)
 					)
 				)
 			),

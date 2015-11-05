@@ -54,13 +54,15 @@ module.exports = React.createClass({
 		return(
 			<div>
 				<div id="login">
-					<form className="loginForm" onSubmit={this.login}>
-						<h3>Username</h3>
-						<input type="text" ref="username"/>
-						<h3>Password</h3>
-						<input type="password" ref="password"/>
-						<button>Go!</button>
-					</form>
+					<div className="loginWhite">
+						<form className="loginForm" onSubmit={this.login}>
+							<h2>Username:</h2>
+							<input className="box-shadow--4dp" type="text" ref="username"/>
+							<h2>Password:</h2>
+							<input className="box-shadow--4dp" type="password" ref="password"/>
+							<button className="box-shadow--4dp">Go!</button>
+						</form>
+					</div>
 				</div>
 				<div className="top-navbar navbar-fixed-top">
 					<img src="../../images/scroll4.png"/>
