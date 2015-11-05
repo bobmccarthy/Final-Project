@@ -34206,7 +34206,7 @@ module.exports = React.createClass({
 			{ className: 'homeBkg' },
 			React.createElement(
 				'div',
-				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel' },
+				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel', 'data-interval': '3000' },
 				React.createElement(
 					'ol',
 					{ className: 'carousel-indicators' },
@@ -34275,7 +34275,7 @@ module.exports = React.createClass({
 					{ className: 'row' },
 					React.createElement(
 						'div',
-						{ className: 'col-xs-6 description box-shadow--2dp' },
+						{ className: 'col-xs-12 col-sm-6 description box-shadow--2dp' },
 						React.createElement(
 							'h2',
 							null,
@@ -34504,7 +34504,7 @@ module.exports = React.createClass({
 		var jibby = this.state.lists.map(function (list) {
 			return React.createElement(
 				'div',
-				{ className: 'col-xs-12 col-sm-7' },
+				{ className: 'col-xs-12 col-sm-8 col-sm-offset-2' },
 				React.createElement(ListBoxComponent, { model: list, id: list.id })
 			);
 		});
@@ -34639,7 +34639,11 @@ module.exports = React.createClass({
 				React.createElement(
 					'a',
 					{ className: 'navBtn', href: '#' },
-					'G',
+					React.createElement(
+						'strong',
+						null,
+						'G'
+					),
 					React.createElement(
 						'span',
 						{ className: 'spam' },
@@ -34898,7 +34902,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'Produce:'
 					),
@@ -34908,7 +34912,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'Breads:'
 					),
@@ -34918,7 +34922,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'Desserts:'
 					),
@@ -34928,7 +34932,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'Soups:'
 					),
@@ -34938,7 +34942,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'Snacks:'
 					),
@@ -34948,7 +34952,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'row' },
 					React.createElement(
-						'h3',
+						'h1',
 						{ className: 'categoryTitle' },
 						'International:'
 					),

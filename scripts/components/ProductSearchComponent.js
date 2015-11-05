@@ -135,27 +135,27 @@ module.exports = React.createClass({
 				</div>
 				<div className="container-fluid listContainer">
 					<div className="row">
-						<h3 className="categoryTitle">Produce:</h3>
+						<h1 className="categoryTitle">Produce:</h1>
 						{produceElements}
 					</div>
 					<div className="row">
-						<h3 className="categoryTitle">Breads:</h3>
+						<h1 className="categoryTitle">Breads:</h1>
 						{breadElements}
 					</div>
 					<div className="row">
-						<h3 className="categoryTitle">Desserts:</h3>
+						<h1 className="categoryTitle">Desserts:</h1>
 						{dessertElements}
 					</div>
 					<div className="row">
-						<h3 className="categoryTitle">Soups:</h3>
+						<h1 className="categoryTitle">Soups:</h1>
 						{soupElements}
 					</div>
 					<div className="row">
-						<h3 className="categoryTitle">Snacks:</h3>
+						<h1 className="categoryTitle">Snacks:</h1>
 						{snackElements}
 					</div>
 					<div className="row">
-						<h3 className="categoryTitle">International:</h3>
+						<h1 className="categoryTitle">International:</h1>
 						{internationalElements}
 					</div>
 				</div>

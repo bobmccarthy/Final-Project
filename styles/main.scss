@@ -1,6 +1,8 @@
 body{
 	margin: 0;
 	margin-top: 2.8em;
+	font-family: Hannotate SC;
+	
 }
 
 #login{
@@ -39,7 +41,7 @@ body{
 	img{
 		height: 3em;
 		margin-left: 1em;
-		margin-top: -0.7em;
+		margin-top: -0.2em;
 	}
 	a{
 		color: white;
@@ -51,7 +53,7 @@ body{
 		font-family: cursive;
 		font-size: 2.2em;
 		padding: 0.5em;
-		margin-left: -1.5em;
+		margin-left: -1.4em;
 		color: #F79227;
 		.spam{
 		
@@ -125,6 +127,7 @@ body{
 }
 .categoryTitle{
 	text-align: left;
+	margin-top: 1em;
 }
 #checkMark{
 	height: 1em;
@@ -136,6 +139,12 @@ body{
 		margin-top: 1em;
 		// margin-bottom: 1em;
 		// height: 35em;
+		h2{
+			color: #F79227;
+			text-align: left;
+			margin-bottom: -0.4em;
+			margin-left: 1.8em;
+		}
 		img{
 
 			height: 100%;
@@ -143,9 +152,7 @@ body{
 			width: 60%;
 		}
 	}
-	h2{
-		color: #F79227;
-	}
+	
 	.adjust{
 		// height: 130%;
 	}
@@ -156,6 +163,9 @@ body{
 	}
 	.description{
 		padding: 1em 2em;
+		h2{
+			color: #F79227;
+		}
 	}
 }
 
@@ -165,6 +175,7 @@ body{
 }
 .listContainer{
 	margin: 2em;
+	margin-top: 0;
 	text-align: center;
 }
 .each{

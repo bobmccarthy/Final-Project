@@ -6,7 +6,7 @@ module.exports = React.createClass({
 	render: function() {
 		return(
 			<div className="homeBkg">
-				<div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
+				<div id="carousel-example-generic" className="carousel slide" data-ride="carousel" data-interval="3000">
 					<ol className="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
 						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -44,7 +44,7 @@ module.exports = React.createClass({
 				</div> 
 				<div className="container-fluid">
 					<div className="row">
-						<div className="col-xs-6 description box-shadow--2dp">
+						<div className="col-xs-12 col-sm-6 description box-shadow--2dp">
 							<h2>Biulding the perfect Grocery list, every time.</h2>
 							<p>One of the least pleasing parts of grocery shopping is having to come up with a list. Currently, we are lucky enough to know a lot about special diets, allergens, and healthy eating, but there is no easy way to find grocery products that fit your preferences and needs. <strong>Gist</strong> is an easy way to build the perfect grocery list that pertains to your needs.</p>
 						</div>

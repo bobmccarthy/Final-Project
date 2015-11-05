@@ -66,7 +66,7 @@ module.exports = React.createClass({
 				</div>
 				<div className="top-navbar navbar-fixed-top">
 					<img src="../../images/scroll4.png"/>
-					<a className="navBtn" href="#">G<span className="spam">ist</span></a>
+					<a className="navBtn" href="#"><strong>G</strong><span className="spam">ist</span></a>
 					{navChange}
 				</div>
 				
