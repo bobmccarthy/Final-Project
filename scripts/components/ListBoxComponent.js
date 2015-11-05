@@ -7,11 +7,23 @@ var productQuery = new Parse.Query(ProductModel);
 
 
 
+
 module.exports = React.createClass({
 	getInitialState: function(){
 		var x = this.props.model.get('products').split(',');
 		x.shift();
-		return{products: x}
+		return{
+			products: x,
+			priceTotal: 0
+		}
+	},
+	componentWillMount: function(){
+		productQuery.containedIn('objectId', this.state.products).find((stuff)=>{
+			stuff.map((stuffy)=>{
+				this.setState({priceTotal: this.state.priceTotal+stuffy.get('price')});
+			})
+		})
+			
 	},
 	render: function() {
 
@@ -28,7 +40,7 @@ module.exports = React.createClass({
 					<button onClick={this.expand}>See List</button>
 					<h2>{this.props.model.get('name')}</h2>
 					<h6>{this.props.model.get('createdAt').toString().substring(0,10)}</h6>
-					<h4>Total: $</h4>
+					<h4>Total: ${this.state.priceTotal}</h4>
 					<section className="toggler" id={this.props.id}>
 						{each}
 					</section>

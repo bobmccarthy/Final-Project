@@ -7,7 +7,7 @@ var UserModel = require('../models/UserModel');
 var ListBoxComponent = require('./ListBoxComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
-
+var array = [];
 
 
 module.exports = React.createClass({
@@ -20,7 +20,6 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function(){
 		listQuery.find().then((lists) => {
-			// console.log(lists);
 			this.setState({lists: lists.reverse()});
 		});
 	},

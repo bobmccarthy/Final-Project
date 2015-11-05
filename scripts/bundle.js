@@ -34368,7 +34368,19 @@ module.exports = React.createClass({
 	getInitialState: function getInitialState() {
 		var x = this.props.model.get('products').split(',');
 		x.shift();
-		return { products: x };
+		return {
+			products: x,
+			priceTotal: 0
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		productQuery.containedIn('objectId', this.state.products).find(function (stuff) {
+			stuff.map(function (stuffy) {
+				_this.setState({ priceTotal: _this.state.priceTotal + stuffy.get('price') });
+			});
+		});
 	},
 	render: function render() {
 
@@ -34400,7 +34412,8 @@ module.exports = React.createClass({
 				React.createElement(
 					'h4',
 					null,
-					'Total: $'
+					'Total: $',
+					this.state.priceTotal
 				),
 				React.createElement(
 					'section',
@@ -34480,6 +34493,7 @@ var UserModel = require('../models/UserModel');
 var ListBoxComponent = require('./ListBoxComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
+var array = [];
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34495,7 +34509,6 @@ module.exports = React.createClass({
 		var _this = this;
 
 		listQuery.find().then(function (lists) {
-			// console.log(lists);
 			_this.setState({ lists: lists.reverse() });
 		});
 	},
