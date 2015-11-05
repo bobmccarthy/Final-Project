@@ -34177,7 +34177,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'col-xs-4' },
 					'$',
-					item.get('price').toFixed(2)
+					item.get('price')
 				)
 			);
 		});
@@ -34413,7 +34413,7 @@ module.exports = React.createClass({
 					'h4',
 					null,
 					'Total: $',
-					this.state.priceTotal
+					this.state.priceTotal.toFixed(2)
 				),
 				React.createElement(
 					'section',
@@ -34509,7 +34509,7 @@ module.exports = React.createClass({
 		var _this = this;
 
 		listQuery.find().then(function (lists) {
-			_this.setState({ lists: lists.reverse() });
+			_this.setState({ lists: lists });
 		});
 	},
 	render: function render() {
@@ -34767,6 +34767,7 @@ var listQuery = new Parse.Query(ListModel);
 
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent = require('./ListDropdownComponent');
+var dietArray = [];
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34800,7 +34801,7 @@ module.exports = React.createClass({
 		});
 		// var diet = Parse.User.current().get('diet').split(',')[2];
 		// console.log(diet);
-		var dietArray = Parse.User.current().get('dietArray');
+		dietArray = Parse.User.current().get('dietArray');
 
 		productQuery.find().then(function (products) {
 			_this.setState({ items: products });

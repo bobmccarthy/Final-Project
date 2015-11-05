@@ -9,7 +9,7 @@ var listQuery = new Parse.Query(ListModel);
 
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent= require('./ListDropdownComponent');
-
+var dietArray = [];
 
 
 
@@ -42,7 +42,7 @@ module.exports = React.createClass({
 		});
 		// var diet = Parse.User.current().get('diet').split(',')[2];
 		// console.log(diet);
-		var dietArray=Parse.User.current().get('dietArray');
+		dietArray=Parse.User.current().get('dietArray');
 
 		productQuery.find().then((products) => {
 			this.setState({items: products});

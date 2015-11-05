@@ -20,7 +20,7 @@ module.exports = React.createClass({
 	},
 	componentWillMount: function(){
 		listQuery.find().then((lists) => {
-			this.setState({lists: lists.reverse()});
+			this.setState({lists: lists});
 		});
 	},
 	render: function() {
