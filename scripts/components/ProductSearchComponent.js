@@ -77,40 +77,40 @@ module.exports = React.createClass({
 	
 	render: function() {
 		// console.log(this.state.listItems);
-		var listDropdown = <ListDropdownComponent callback={this.listChange} router={this.props.router}/>
-		var allElements = this.state.items.map((product) => {
-			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
-			)
-		})
+		var listDropdown = <ListDropdownComponent key="listDropdownThingy" callback={this.listChange} router={this.props.router}/>
+		// var allElements = this.state.items.map((product) => {
+		// 	return (
+		// 		<ProductBoxComponent model={product} callback={this.onItemAdded} />
+		// 	)
+		// })
 		var produceElements = this.state.produce.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		var breadElements = this.state.breads.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		var dessertElements = this.state.desserts.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		var soupElements = this.state.soups.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		var snackElements = this.state.snacks.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		var internationalElements = this.state.international.map((product) => {
 			return (
-				<ProductBoxComponent model={product} callback={this.onItemAdded} />
+				<ProductBoxComponent key={product.id} model={product} callback={this.onItemAdded} />
 			);
 		})
 		return(

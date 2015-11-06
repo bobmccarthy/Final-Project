@@ -9,8 +9,8 @@ module.exports = React.createClass({
 			<h1>Create a New Shopping List</h1>
 				<form onSubmit={this.submit}>
 					<div className="addListCont box-shadow--6dp">
-						<h3>New List Name:</h3>
-						<input ref="name" type="text"/>
+						<h2>New List Name:</h2>
+						<input ref="name" type="text" placeholder="type name here"/>
 						<button>Add List</button>
 					</div>
 

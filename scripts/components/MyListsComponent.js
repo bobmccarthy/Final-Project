@@ -8,6 +8,7 @@ var ListBoxComponent = require('./ListBoxComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
 var array = [];
+var jibby=(<div>Loading...</div>);
 
 
 module.exports = React.createClass({
@@ -19,19 +20,18 @@ module.exports = React.createClass({
 	    };
 	},
 	componentWillMount: function(){
+		listQuery.descending('createdAt');
 		listQuery.find().then((lists) => {
+			//post fail here?
 			this.setState({lists: lists});
 		});
 	},
 	render: function() {
-		// console.log(this.state.lists);
 		var jibby = this.state.lists.map((list) => {
 			return (
-				
 				<div className="col-xs-12 col-sm-8 col-sm-offset-2">
-					<ListBoxComponent model={list} id={list.id}/>
-				</div>
-					
+					<ListBoxComponent key={list.id} model={list} id={list.id}/>
+				</div>	
 			)
 		})
 		return(

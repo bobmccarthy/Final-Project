@@ -34098,11 +34098,11 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'addListCont box-shadow--6dp' },
 					React.createElement(
-						'h3',
+						'h2',
 						null,
 						'New List Name:'
 					),
-					React.createElement('input', { ref: 'name', type: 'text' }),
+					React.createElement('input', { ref: 'name', type: 'text', placeholder: 'type name here' }),
 					React.createElement(
 						'button',
 						null,
@@ -34142,16 +34142,28 @@ module.exports = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			product: this.props.model,
+			product: '',
 			item: []
 		};
 	},
 	componentWillMount: function componentWillMount() {
+		this.setState({ product: this.props.model });
+		// console.log(this.state.product);
+		// productQuery.contains('objectId', this.state.product);
+		// productQuery.find().then((product) => {
+		// 	// console.log('request');
+		// 	this.setState({
+		// 		item: product
+		// 	});
+		// });
+	},
+	componentDidMount: function componentDidMount() {
 		var _this = this;
 
-		// console.log(this.state.product);
 		productQuery.contains('objectId', this.state.product);
+		//post fail here?
 		productQuery.find().then(function (product) {
+			// console.log('request');
 			_this.setState({
 				item: product
 			});
@@ -34161,7 +34173,7 @@ module.exports = React.createClass({
 		var y = this.state.item.map(function (item) {
 			return React.createElement(
 				'div',
-				{ className: 'listItemDeets row' },
+				{ key: item.id, className: 'listItemDeets row' },
 				React.createElement(
 					'div',
 					{ className: 'col-xs-4' },
@@ -34190,7 +34202,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ProductModel":188,"jquery":17,"react":173}],176:[function(require,module,exports){
+},{"../models/ProductModel":189,"jquery":17,"react":173}],176:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34206,7 +34218,7 @@ module.exports = React.createClass({
 			{ className: 'homeBkg' },
 			React.createElement(
 				'div',
-				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel', 'data-interval': '3000' },
+				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel', 'data-interval': '5000' },
 				React.createElement(
 					'ol',
 					{ className: 'carousel-indicators' },
@@ -34224,11 +34236,7 @@ module.exports = React.createClass({
 						React.createElement(
 							'div',
 							{ className: 'carousel-caption' },
-							React.createElement(
-								'h2',
-								null,
-								'Desktop Layout'
-							)
+							React.createElement('h3', null)
 						)
 					),
 					React.createElement(
@@ -34238,11 +34246,7 @@ module.exports = React.createClass({
 						React.createElement(
 							'div',
 							{ className: 'carousel-caption' },
-							React.createElement(
-								'h2',
-								null,
-								'Mobile Layout'
-							)
+							React.createElement('h3', null)
 						)
 					),
 					React.createElement(
@@ -34341,7 +34345,7 @@ module.exports = React.createClass({
 	render: function render() {
 
 		var singleProduct = this.state.item.map(function (product) {
-			return React.createElement(SingleProductBoxComponent, { model: product });
+			return React.createElement(SingleProductBoxComponent, { key: product.id, model: product });
 		});
 		return React.createElement(
 			'div',
@@ -34352,12 +34356,14 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ProductModel":188,"./SingleProductBoxComponent":185,"react":173}],178:[function(require,module,exports){
+},{"../models/ProductModel":189,"./SingleProductBoxComponent":185,"react":173}],178:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 window.$ = require('jquery');
 window.jQuery = $;
+var ListProductsModel = require('../models/ListProductsModel');
+var ListProductsQuery = new Parse.Query(ListProductsModel);
 var ProductModel = require('../models/ProductModel');
 var EachProductComponent = require('./EachProductComponent');
 var productQuery = new Parse.Query(ProductModel);
@@ -34383,10 +34389,9 @@ module.exports = React.createClass({
 		});
 	},
 	render: function render() {
-
 		var each = this.state.products.map(function (list) {
-
-			return React.createElement(EachProductComponent, { model: list });
+			console.log(list);
+			return React.createElement(EachProductComponent, { key: list.id, model: list });
 		});
 		return React.createElement(
 			'div',
@@ -34429,7 +34434,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ProductModel":188,"./EachProductComponent":175,"jquery":17,"react":173}],179:[function(require,module,exports){
+},{"../models/ListProductsModel":188,"../models/ProductModel":189,"./EachProductComponent":175,"jquery":17,"react":173}],179:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34458,13 +34463,13 @@ module.exports = React.createClass({
 			if (Backbone.history.getFragment().substring(14, 24) == list.id) {
 				return React.createElement(
 					'option',
-					{ selected: 'selected', value: list.id },
+					{ selected: 'selected', key: list.id, value: list.id },
 					list.get('name')
 				);
 			} else {
 				return React.createElement(
 					'option',
-					{ value: list.id },
+					{ key: list.id, value: list.id },
 					list.get('name')
 				);
 			}
@@ -34494,6 +34499,11 @@ var ListBoxComponent = require('./ListBoxComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
 var array = [];
+var jibby = React.createElement(
+	'div',
+	null,
+	'Loading...'
+);
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34508,17 +34518,18 @@ module.exports = React.createClass({
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
+		listQuery.descending('createdAt');
 		listQuery.find().then(function (lists) {
+			//post fail here?
 			_this.setState({ lists: lists });
 		});
 	},
 	render: function render() {
-		// console.log(this.state.lists);
 		var jibby = this.state.lists.map(function (list) {
 			return React.createElement(
 				'div',
 				{ className: 'col-xs-12 col-sm-8 col-sm-offset-2' },
-				React.createElement(ListBoxComponent, { model: list, id: list.id })
+				React.createElement(ListBoxComponent, { key: list.id, model: list, id: list.id })
 			);
 		});
 		return React.createElement(
@@ -34539,7 +34550,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"../models/ProductModel":188,"../models/UserModel":189,"./ListBoxComponent":178,"backbone/node_modules/underscore":2,"react":173}],181:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ProductModel":189,"../models/UserModel":190,"./ListBoxComponent":178,"backbone/node_modules/underscore":2,"react":173}],181:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34838,27 +34849,29 @@ module.exports = React.createClass({
 		var _this2 = this;
 
 		// console.log(this.state.listItems);
-		var listDropdown = React.createElement(ListDropdownComponent, { callback: this.listChange, router: this.props.router });
-		var allElements = this.state.items.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
-		});
+		var listDropdown = React.createElement(ListDropdownComponent, { key: 'listDropdownThingy', callback: this.listChange, router: this.props.router });
+		// var allElements = this.state.items.map((product) => {
+		// 	return (
+		// 		<ProductBoxComponent model={product} callback={this.onItemAdded} />
+		// 	)
+		// })
 		var produceElements = this.state.produce.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		var breadElements = this.state.breads.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		var dessertElements = this.state.desserts.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		var soupElements = this.state.soups.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		var snackElements = this.state.snacks.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		var internationalElements = this.state.international.map(function (product) {
-			return React.createElement(ProductBoxComponent, { model: product, callback: _this2.onItemAdded });
+			return React.createElement(ProductBoxComponent, { key: product.id, model: product, callback: _this2.onItemAdded });
 		});
 		return React.createElement(
 			'div',
@@ -35005,7 +35018,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"../models/ProductModel":188,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ProductModel":189,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -35225,10 +35238,17 @@ module.exports = Parse.Object.extend({
 'use strict';
 
 module.exports = Parse.Object.extend({
-  className: 'products'
+  className: 'listProducts'
 });
 
 },{}],189:[function(require,module,exports){
+'use strict';
+
+module.exports = Parse.Object.extend({
+  className: 'products'
+});
+
+},{}],190:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({

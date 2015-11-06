@@ -22,7 +22,7 @@ module.exports = React.createClass({
 
 		var singleProduct = this.state.item.map((product) => {
 			return (
-				<SingleProductBoxComponent model={product} />
+				<SingleProductBoxComponent key={product.id} model={product} />
 			);
 		})
 		return (

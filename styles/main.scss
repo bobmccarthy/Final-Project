@@ -250,13 +250,14 @@ body{
 	height: 5em;
 }
 .addList{
-	text-align: center;
+	// text-align: center;
 	.addListCont{
+		background-color: white;
 		h3{
 			text-align: left;
 		}
-		width: 40%;
-		margin: 2em 30%;
+		width: 50%;
+		margin: 2em 25%;
 		padding: 2em;
 		input{
 			font-size: 2em;
@@ -275,6 +276,7 @@ body{
 
 }
 .infoForm{
+	background-color: white;
 	#cancelBtn{
 		float: right;
 		margin-bottom: 0.5em;

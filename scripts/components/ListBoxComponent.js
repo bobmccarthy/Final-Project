@@ -1,6 +1,8 @@
 var React = require('react');
 window.$ = require('jquery');
 window.jQuery = $;
+var ListProductsModel = require('../models/ListProductsModel');
+var ListProductsQuery = new Parse.Query(ListProductsModel);
 var ProductModel = require('../models/ProductModel');
 var EachProductComponent = require('./EachProductComponent');
 var productQuery = new Parse.Query(ProductModel);
@@ -26,12 +28,10 @@ module.exports = React.createClass({
 			
 	},
 	render: function() {
-
-		
 		var each = this.state.products.map((list) => {
-			
+			console.log(list);
 			return (
-				<EachProductComponent model={list} />
+				<EachProductComponent key={list.id} model={list} />
 			)
 		})
 		return (

@@ -21,12 +21,12 @@ module.exports = React.createClass({
 		var listy = this.state.lists.map(function(list){
 			if (Backbone.history.getFragment().substring(14,24)==list.id){
 				return (
-					<option selected="selected" value={list.id}>{list.get('name')}</option>
+					<option selected="selected" key={list.id} value={list.id}>{list.get('name')}</option>
 				)
 			}
 			else{
 				return (
-					<option value={list.id}>{list.get('name')}</option>
+					<option key={list.id} value={list.id}>{list.get('name')}</option>
 				)
 			}
 			
