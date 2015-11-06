@@ -40,7 +40,7 @@ module.exports = React.createClass({
 					<button onClick={this.expand}>See List</button>
 					<h2>{this.props.model.get('name')}</h2>
 					<h6>{this.props.model.get('createdAt').toString().substring(0,10)}</h6>
-					<h4>Total: ${this.state.priceTotal.toFixed(2)}</h4>
+					<h3>Total: ${this.state.priceTotal.toFixed(2)}</h3>
 					<section className="toggler" id={this.props.id}>
 						{each}
 					</section>

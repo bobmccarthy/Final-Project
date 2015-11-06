@@ -1,7 +1,8 @@
 body {
   margin: 0;
   margin-top: 2.8em;
-  font-family: Hannotate SC; }
+  font-family: Hannotate SC;
+  background-color: #ECECEC; }
 
 #login {
   z-index: 900;
@@ -87,9 +88,11 @@ body {
     height: 2em;
     margin: .7em; }
 
-.listItemDeets input {
-  display: inline;
-  width: 2em; }
+.listItemDeets {
+  font-size: 1.25em; }
+  .listItemDeets .quantity {
+    display: inline;
+    width: 2em; }
 
 .categoryTitle {
   text-align: left;
@@ -134,6 +137,7 @@ body {
   margin-top: 1em; }
 
 .eachList {
+  background-color: white;
   padding: 1em; }
   .eachList h2 {
     margin-top: 0; }
@@ -150,7 +154,8 @@ body {
 
 .listItems {
   height: 14em;
-  padding: 1em; }
+  padding: 1em;
+  background-color: white; }
   .listItems .addToCart {
     background-color: #F79227;
     color: white;

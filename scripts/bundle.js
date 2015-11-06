@@ -34170,7 +34170,7 @@ module.exports = React.createClass({
 				React.createElement(
 					'div',
 					{ className: 'col-xs-4' },
-					'Qty:',
+					'Qty: ',
 					React.createElement('input', { className: 'quantity', defaultValue: '1', type: 'number' })
 				),
 				React.createElement(
@@ -34410,7 +34410,7 @@ module.exports = React.createClass({
 					this.props.model.get('createdAt').toString().substring(0, 10)
 				),
 				React.createElement(
-					'h4',
+					'h3',
 					null,
 					'Total: $',
 					this.state.priceTotal.toFixed(2)
@@ -34905,7 +34905,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'div',
 						{ className: 'col-xs-6 searchy' },
-						React.createElement('input', { className: 'box-shadow--4dp', placeholder: 'Search Products:', type: 'text' })
+						React.createElement('input', { ref: 'searchBox', onKeyUp: this.color, className: 'searchBox box-shadow--4dp', placeholder: 'Search Products:', type: 'text' })
 					)
 				)
 			),
@@ -34987,8 +34987,22 @@ module.exports = React.createClass({
 			list.set('products', _this3.state.listItems);
 			list.save();
 		});
+	},
+	color: function color() {
+		if (this.refs.searchBox.value === '1') {
+			console.log('1');
+			$('#body').css({ 'background-color': '#ECECEC' });
+		}
+		if (this.refs.searchBox.value === '2') {
+			console.log('2');
+			$('#body').css({ 'background-color': '#F6F6F6' });
+		}
+		if (this.refs.searchBox.value === '3') {
+			console.log('3');
+			$('#body').css({ 'background-color': '#32EE74' });
+		}
 	}
-	// <button className="box-shadow--2dp go">Go</button>
+
 });
 
 },{"../models/ListModel":187,"../models/ProductModel":188,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){

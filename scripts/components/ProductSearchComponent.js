@@ -128,8 +128,8 @@ module.exports = React.createClass({
 						</div>
 
 						<div className="col-xs-6 searchy">
-							<input className="box-shadow--4dp" placeholder="Search Products:" type="text" />
-							
+							<input ref="searchBox" onKeyUp={this.color} className="searchBox box-shadow--4dp" placeholder="Search Products:" type="text" />
+						
 						</div>
 					</div>
 				</div>
@@ -176,6 +176,20 @@ module.exports = React.createClass({
 			list.save();
 		}
 		);
+	},
+	color: function(){
+		if (this.refs.searchBox.value==='1'){
+			console.log('1');
+			$('#body').css({'background-color': '#ECECEC'});
+		}
+		if (this.refs.searchBox.value==='2'){
+			console.log('2');
+			$('#body').css({'background-color': '#F6F6F6'});
+		}
+		if (this.refs.searchBox.value==='3'){
+			console.log('3');
+			$('#body').css({'background-color': '#32EE74'});
+		}
 	}
-	// <button className="box-shadow--2dp go">Go</button>
+	
 });

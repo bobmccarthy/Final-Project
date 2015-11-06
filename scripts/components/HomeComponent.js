@@ -17,13 +17,13 @@ module.exports = React.createClass({
 						<div className="item active">
 							<img src="../../images/comp2.jpg" alt="..."/>
 							<div className="carousel-caption">
-								<h2>Desktop Layout</h2>
+								<h3></h3>
 							</div>
 						</div>
 						<div className="item">
 							<img className="adjust" src="../../images/phone.png" alt="..."/>
 							<div className="carousel-caption">
-								<h2>Mobile Layout</h2>
+								<h3></h3>
 							</div>
 						</div>
 						<div className="item">

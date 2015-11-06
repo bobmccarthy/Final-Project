@@ -3,6 +3,8 @@ body{
 	margin-top: 2.8em;
 	font-family: Hannotate SC;
 	
+	background-color: #ECECEC;
+	
 }
 
 #login{
@@ -120,10 +122,12 @@ body{
 	}
 }
 .listItemDeets{
-	input{
+	font-size: 1.25em;
+	.quantity{
 		display: inline;
 		width: 2em;
 	}
+
 }
 .categoryTitle{
 	text-align: left;
@@ -183,6 +187,7 @@ body{
 	margin-top: 1em;
 }
 .eachList{
+	background-color: white;
 	padding: 1em;
 	h2{
 		margin-top: 0;
@@ -203,6 +208,7 @@ body{
 .listItems{
 	height: 14em;
 	padding: 1em;
+	background-color: white;
 	
 	.addToCart{
 		background-color: #F79227;

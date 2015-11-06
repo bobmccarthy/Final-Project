@@ -28,7 +28,7 @@ module.exports = React.createClass({
 			return (
 				<div className="listItemDeets row">
 					<div className="col-xs-4">{item.get('name')}</div>
-					<div className="col-xs-4">Qty:<input className="quantity" defaultValue='1' type="number"/></div>
+					<div className="col-xs-4">Qty: <input className="quantity" defaultValue='1' type="number"/></div>
 					<div className="col-xs-4">${item.get('price')}</div>
 				</div>
 			)
