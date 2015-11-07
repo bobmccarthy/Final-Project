@@ -24,7 +24,7 @@ $(document).on('ready', function(){
 			'logout': 'home',
 			'productSearch(/:id)': 'productSearch',
 			'profile': 'profile',
-			'myLists': 'myLists',
+			'myLists(/:id)': 'myLists',
 			'details/:id': 'details',
 			'addList': 'addList'
 		},
@@ -44,8 +44,8 @@ $(document).on('ready', function(){
 			ReactDOM.render(<ProfileComponent router={r} />,
 			document.getElementById('main'));
 		},
-		myLists: function(){
-			ReactDOM.render(<MyListsComponent router={r} />,
+		myLists: function(id){
+			ReactDOM.render(<MyListsComponent router={r} itemId={id}/>,
 			document.getElementById('main'));
 		},
 		details: function(id){

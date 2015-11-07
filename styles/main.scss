@@ -188,6 +188,7 @@ body{
 }
 .eachList{
 	background-color: white;
+	margin-top: 1em;
 	padding: 1em;
 	h2{
 		margin-top: 0;
@@ -219,6 +220,11 @@ body{
 		margin-top: -1em;
 		margin-right: -1em;
 		float: right;
+	}
+}
+.listBoxProducts{
+	input{
+		width: 50%;
 	}
 }
 .singleProduct{

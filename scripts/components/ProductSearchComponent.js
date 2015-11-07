@@ -6,6 +6,7 @@ var ListModel = require('../models/ListModel');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
+var ListProductsModel = require('../models/ListProductsModel');
 
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent= require('./ListDropdownComponent');
@@ -33,9 +34,10 @@ module.exports = React.createClass({
 		this.props.router.on('route', () => {
 			listQuery.equalTo('objectId', Backbone.history.getFragment().substring(14,24));
 			listQuery.find().then((list)=> {
-				list.map((list)=>{
+				list.map((listz)=>{
+					console.log(listz);
 					this.setState({
-						listItems: list.get('products')
+						listItems: listz
 					})
 				})
 			});
@@ -166,16 +168,14 @@ module.exports = React.createClass({
 	},
 	onItemAdded: function(model){
 		// $('#button/'+model.id).css('background-color', 'red');
-		var list= new ListModel();
-		this.setState({
-			listItems: this.state.listItems+','+model.id
-		}
-		,()=>{
-			list.set('objectId', this.props.listId);
-			list.set('products', this.state.listItems);
-			list.save();
-		}
-		);
+		var list= new ListProductsModel();
+		list.set('theList', this.state.listItems);
+		list.set('theProducts', model);
+		list.save({
+			success: function(){
+				console.log('saved');
+			}
+		});
 	},
 	color: function(){
 		if (this.refs.searchBox.value==='1'){

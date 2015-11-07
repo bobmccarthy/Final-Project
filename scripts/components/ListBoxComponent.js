@@ -29,7 +29,7 @@ module.exports = React.createClass({
 	},
 	render: function() {
 		var each = this.state.products.map((list) => {
-			console.log(list);
+			// console.log(list);
 			return (
 				<EachProductComponent key={list.id} model={list} />
 			)
