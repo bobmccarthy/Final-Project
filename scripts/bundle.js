@@ -34133,76 +34133,112 @@ module.exports = React.createClass({
 'use strict';
 
 var React = require('react');
+var $ = require('jquery');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
-var $ = require('jquery');
+var ListProductsModel = require('../models/ListProductsModel');
+var oneItem = React.createElement(
+	'div',
+	null,
+	'loading...'
+);
+var counter = 1;
+var itemy = [];
 
 module.exports = React.createClass({
 	displayName: 'exports',
 
 	getInitialState: function getInitialState() {
 		return {
-			product: '',
-			item: []
+			listObject: this.props.model,
+			items: [],
+			prices: []
 		};
 	},
 	componentWillMount: function componentWillMount() {
-		this.setState({ product: this.props.model });
-		// console.log(this.state.product);
-		// productQuery.contains('objectId', this.state.product);
-		// productQuery.find().then((product) => {
-		// 	// console.log('request');
-		// 	this.setState({
-		// 		item: product
-		// 	});
-		// });
-	},
-	componentDidMount: function componentDidMount() {
 		var _this = this;
 
-		productQuery.contains('objectId', this.state.product);
-		//post fail here?
-		productQuery.find().then(function (product) {
-			// console.log('request');
-			_this.setState({
-				item: product
-			});
+		itemy = [];
+		this.setState({ listObject: this.props.model });
+		var listProductsQuery = new Parse.Query(ListProductsModel);
+		listProductsQuery.equalTo('theList', this.state.listObject);
+		listProductsQuery.include('theProducts').find().then(function (lists) {
+			_this.setState({ items: lists });
+			// for (var i = 0; i<lists.length; i++){
+			// 	this.setState({
+			// 		items: (this.state.items+lists[i].get('theProducts').get('name')+',').split(','),
+			// 		prices: (this.state.prices+lists[i].get('theProducts').get('price')+',').split(',')
+			// 	})
+			// }
 		});
 	},
 	render: function render() {
-		var y = this.state.item.map(function (item) {
+		var count = 0;
+		// console.log(this.state.items);
+		// console.log(this.state.prices);
+		// console.log(this.state.prices[0]);
+		var z = this.state.items.map(function (itemName) {
+			// console.log(itemName.get('theProducts').get('price'));
+
 			return React.createElement(
 				'div',
-				{ key: item.id, className: 'listItemDeets row' },
+				{ className: 'row listBoxProducts' },
 				React.createElement(
 					'div',
 					{ className: 'col-xs-4' },
-					item.get('name')
+					React.createElement(
+						'h3',
+						null,
+						itemName.get('theProducts').get('name')
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'col-xs-1' },
+					React.createElement(
+						'h3',
+						null,
+						'Qty: '
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'col-xs-3' },
+					React.createElement(
+						'h3',
+						null,
+						React.createElement('input', { type: 'number' })
+					)
 				),
 				React.createElement(
 					'div',
 					{ className: 'col-xs-4' },
-					'Qty: ',
-					React.createElement('input', { className: 'quantity', defaultValue: '1', type: 'number' })
-				),
-				React.createElement(
-					'div',
-					{ className: 'col-xs-4' },
-					'$',
-					item.get('price')
+					React.createElement(
+						'h3',
+						null,
+						'$',
+						itemName.get('theProducts').get('price').toFixed(2)
+					)
 				)
 			);
+
+			// console.log(this.state.prices[count]);
+			// count=count+1;
 		});
+
+		// for (var j=0; j<this.state.items.length-1; j++){
+		// 	var k = <div>{this.state.items[0]}</div>
+		// }
 		return React.createElement(
 			'div',
-			null,
-			y
+			{ className: 'container-fluid' },
+			z
 		);
 	}
 
 });
 
-},{"../models/ProductModel":189,"jquery":17,"react":173}],176:[function(require,module,exports){
+},{"../models/ListProductsModel":188,"../models/ProductModel":189,"jquery":17,"react":173}],176:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34390,7 +34426,7 @@ module.exports = React.createClass({
 	},
 	render: function render() {
 		var each = this.state.products.map(function (list) {
-			console.log(list);
+			// console.log(list);
 			return React.createElement(EachProductComponent, { key: list.id, model: list });
 		});
 		return React.createElement(
@@ -34491,6 +34527,7 @@ module.exports = React.createClass({
 
 var React = require('react');
 var _ = require('backbone/node_modules/underscore');
+var Backbone = require('backbone');
 
 var ProductModel = require('../models/ProductModel');
 var ListModel = require('../models/ListModel');
@@ -34498,7 +34535,8 @@ var UserModel = require('../models/UserModel');
 var ListBoxComponent = require('./ListBoxComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
-var array = [];
+var EachProductComponent = require('./EachProductComponent');
+
 var jibby = React.createElement(
 	'div',
 	null,
@@ -34510,8 +34548,7 @@ module.exports = React.createClass({
 
 	getInitialState: function getInitialState() {
 		return {
-			lists: [],
-			items: '',
+			lists: null,
 			error: null
 		};
 	},
@@ -34520,37 +34557,83 @@ module.exports = React.createClass({
 
 		listQuery.descending('createdAt');
 		listQuery.find().then(function (lists) {
-			//post fail here?
+			console.log(lists);
 			_this.setState({ lists: lists });
 		});
 	},
 	render: function render() {
-		var jibby = this.state.lists.map(function (list) {
+		var _this2 = this;
+
+		if (this.state.lists !== null) {
+			// console.log(this.state.lists);
+			var jibby = this.state.lists.map(function (list) {
+				// console.log(list.id);
+				var each = React.createElement(EachProductComponent, { key: list.id, model: list });
+				return React.createElement(
+					'div',
+					{ className: 'each' },
+					React.createElement(
+						'div',
+						{ className: 'eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp' },
+						React.createElement(
+							'button',
+							{ onClick: _this2.expand },
+							'See List'
+						),
+						React.createElement(
+							'h2',
+							null,
+							list.get('name')
+						),
+						React.createElement(
+							'h6',
+							null,
+							list.get('createdAt').toString().substring(0, 10)
+						),
+						React.createElement(
+							'h3',
+							null,
+							'Total: $'
+						),
+						React.createElement(
+							'section',
+							{ className: 'toggler', id: list.id },
+							each
+						)
+					)
+				);
+			});
 			return React.createElement(
 				'div',
-				{ className: 'col-xs-12 col-sm-8 col-sm-offset-2' },
-				React.createElement(ListBoxComponent, { key: list.id, model: list, id: list.id })
+				{ className: 'container-fluid' },
+				React.createElement(
+					'h1',
+					null,
+					'Your Current Grocery Lists:'
+				),
+				React.createElement(
+					'div',
+					{ className: 'row' },
+					jibby
+				)
 			);
-		});
-		return React.createElement(
-			'div',
-			{ className: 'container-fluid' },
-			React.createElement(
-				'h1',
-				null,
-				'Your Current Grocery Lists:'
-			),
-			React.createElement(
+		} else {
+			return React.createElement(
 				'div',
-				{ className: 'row' },
-				jibby
-			)
-		);
+				null,
+				'Loading...'
+			);
+		}
+	},
+	expand: function expand() {
+		// console.log(this);
+		// console.log(Backbone.history.getFragment().substring(8,18));
+		$('.toggler').toggle('slow');
 	}
 
 });
 
-},{"../models/ListModel":187,"../models/ProductModel":189,"../models/UserModel":190,"./ListBoxComponent":178,"backbone/node_modules/underscore":2,"react":173}],181:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ProductModel":189,"../models/UserModel":190,"./EachProductComponent":175,"./ListBoxComponent":178,"backbone":1,"backbone/node_modules/underscore":2,"react":173}],181:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34775,6 +34858,7 @@ var ListModel = require('../models/ListModel');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
+var ListProductsModel = require('../models/ListProductsModel');
 
 var ProductBoxComponent = require('./ProductBoxComponent');
 var ListDropdownComponent = require('./ListDropdownComponent');
@@ -34803,9 +34887,10 @@ module.exports = React.createClass({
 		this.props.router.on('route', function () {
 			listQuery.equalTo('objectId', Backbone.history.getFragment().substring(14, 24));
 			listQuery.find().then(function (list) {
-				list.map(function (list) {
+				list.map(function (listz) {
+					console.log(listz);
 					_this.setState({
-						listItems: list.get('products')
+						listItems: listz
 					});
 				});
 			});
@@ -34989,16 +35074,14 @@ module.exports = React.createClass({
 		);
 	},
 	onItemAdded: function onItemAdded(model) {
-		var _this3 = this;
-
 		// $('#button/'+model.id).css('background-color', 'red');
-		var list = new ListModel();
-		this.setState({
-			listItems: this.state.listItems + ',' + model.id
-		}, function () {
-			list.set('objectId', _this3.props.listId);
-			list.set('products', _this3.state.listItems);
-			list.save();
+		var list = new ListProductsModel();
+		list.set('theList', this.state.listItems);
+		list.set('theProducts', model);
+		list.save({
+			success: function success() {
+				console.log('saved');
+			}
 		});
 	},
 	color: function color() {
@@ -35018,7 +35101,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"../models/ProductModel":189,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ListProductsModel":188,"../models/ProductModel":189,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -35193,7 +35276,7 @@ $(document).on('ready', function () {
 			'logout': 'home',
 			'productSearch(/:id)': 'productSearch',
 			'profile': 'profile',
-			'myLists': 'myLists',
+			'myLists(/:id)': 'myLists',
 			'details/:id': 'details',
 			'addList': 'addList'
 		},
@@ -35210,8 +35293,8 @@ $(document).on('ready', function () {
 		profile: function profile() {
 			ReactDOM.render(React.createElement(ProfileComponent, { router: r }), document.getElementById('main'));
 		},
-		myLists: function myLists() {
-			ReactDOM.render(React.createElement(MyListsComponent, { router: r }), document.getElementById('main'));
+		myLists: function myLists(id) {
+			ReactDOM.render(React.createElement(MyListsComponent, { router: r, itemId: id }), document.getElementById('main'));
 		},
 		details: function details(id) {
 			ReactDOM.render(React.createElement(ItemDetailsComponent, { router: r, itemId: id }), document.getElementById('main'));
@@ -35238,7 +35321,7 @@ module.exports = Parse.Object.extend({
 'use strict';
 
 module.exports = Parse.Object.extend({
-  className: 'listProducts'
+  className: 'ListProducts'
 });
 
 },{}],189:[function(require,module,exports){
