@@ -35,7 +35,7 @@ module.exports = React.createClass({
 			listQuery.equalTo('objectId', Backbone.history.getFragment().substring(14,24));
 			listQuery.find().then((list)=> {
 				list.map((listz)=>{
-					console.log(listz);
+					// console.log(listz);
 					this.setState({
 						listItems: listz
 					})
@@ -46,9 +46,9 @@ module.exports = React.createClass({
 		// console.log(diet);
 		dietArray=Parse.User.current().get('dietArray');
 
-		productQuery.find().then((products) => {
-			this.setState({items: products});
-		});
+		// productQuery.find().then((products) => {
+		// 	this.setState({items: products});
+		// });
 		productQuery.equalTo('category', 'produce');
 		productQuery.notContainedIn('ingredients', dietArray);
 		productQuery.find().then((products) => {
@@ -119,7 +119,7 @@ module.exports = React.createClass({
 			<div>
 				<div className="bottom-navbar row box-shadow--2dp">
 					<div className="storeLogo col-xs-12 col-sm-4 box-shadow--2dp">
-						<h2>FreshMarketFoos</h2>
+						<h2>FreshMarketFoods</h2>
 					</div>
 					<div className="col-xs-12 col-sm-8 row searches">
 						<div className="col-xs-6">
@@ -138,7 +138,9 @@ module.exports = React.createClass({
 				<div className="container-fluid listContainer">
 					<div className="row">
 						<h1 className="categoryTitle">Produce:</h1>
-						{produceElements}
+						
+							{produceElements}
+						
 					</div>
 					<div className="row">
 						<h1 className="categoryTitle">Breads:</h1>
@@ -178,6 +180,17 @@ module.exports = React.createClass({
 		});
 	},
 	color: function(){
+
+		if (this.refs.searchBox.value==''){
+			$('.listItems').show();
+			$('.xtraMargin').css({'width':'25%'})
+		}
+		else{
+			$('.listItems').hide();
+			$('.'+this.refs.searchBox.value).show();
+			$('.xtraMargin').css({'width': '100%'});
+		}
+		
 		if (this.refs.searchBox.value==='1'){
 			console.log('1');
 			$('#body').css({'background-color': '#ECECEC'});

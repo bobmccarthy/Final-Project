@@ -34137,13 +34137,6 @@ var $ = require('jquery');
 var ProductModel = require('../models/ProductModel');
 var productQuery = new Parse.Query(ProductModel);
 var ListProductsModel = require('../models/ListProductsModel');
-var oneItem = React.createElement(
-	'div',
-	null,
-	'loading...'
-);
-var counter = 1;
-var itemy = [];
 
 module.exports = React.createClass({
 	displayName: 'exports',
@@ -34158,27 +34151,16 @@ module.exports = React.createClass({
 	componentWillMount: function componentWillMount() {
 		var _this = this;
 
-		itemy = [];
 		this.setState({ listObject: this.props.model });
 		var listProductsQuery = new Parse.Query(ListProductsModel);
 		listProductsQuery.equalTo('theList', this.state.listObject);
 		listProductsQuery.include('theProducts').find().then(function (lists) {
 			_this.setState({ items: lists });
-			// for (var i = 0; i<lists.length; i++){
-			// 	this.setState({
-			// 		items: (this.state.items+lists[i].get('theProducts').get('name')+',').split(','),
-			// 		prices: (this.state.prices+lists[i].get('theProducts').get('price')+',').split(',')
-			// 	})
-			// }
 		});
 	},
 	render: function render() {
-		var count = 0;
-		// console.log(this.state.items);
-		// console.log(this.state.prices);
-		// console.log(this.state.prices[0]);
+
 		var z = this.state.items.map(function (itemName) {
-			// console.log(itemName.get('theProducts').get('price'));
 
 			return React.createElement(
 				'div',
@@ -34221,14 +34203,8 @@ module.exports = React.createClass({
 					)
 				)
 			);
-
-			// console.log(this.state.prices[count]);
-			// count=count+1;
 		});
 
-		// for (var j=0; j<this.state.items.length-1; j++){
-		// 	var k = <div>{this.state.items[0]}</div>
-		// }
 		return React.createElement(
 			'div',
 			{ className: 'container-fluid' },
@@ -34392,85 +34368,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ProductModel":189,"./SingleProductBoxComponent":185,"react":173}],178:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-window.$ = require('jquery');
-window.jQuery = $;
-var ListProductsModel = require('../models/ListProductsModel');
-var ListProductsQuery = new Parse.Query(ListProductsModel);
-var ProductModel = require('../models/ProductModel');
-var EachProductComponent = require('./EachProductComponent');
-var productQuery = new Parse.Query(ProductModel);
-
-module.exports = React.createClass({
-	displayName: 'exports',
-
-	getInitialState: function getInitialState() {
-		var x = this.props.model.get('products').split(',');
-		x.shift();
-		return {
-			products: x,
-			priceTotal: 0
-		};
-	},
-	componentWillMount: function componentWillMount() {
-		var _this = this;
-
-		productQuery.containedIn('objectId', this.state.products).find(function (stuff) {
-			stuff.map(function (stuffy) {
-				_this.setState({ priceTotal: _this.state.priceTotal + stuffy.get('price') });
-			});
-		});
-	},
-	render: function render() {
-		var each = this.state.products.map(function (list) {
-			// console.log(list);
-			return React.createElement(EachProductComponent, { key: list.id, model: list });
-		});
-		return React.createElement(
-			'div',
-			{ className: 'box-shadow--3dp each' },
-			React.createElement(
-				'div',
-				{ className: 'eachList' },
-				React.createElement(
-					'button',
-					{ onClick: this.expand },
-					'See List'
-				),
-				React.createElement(
-					'h2',
-					null,
-					this.props.model.get('name')
-				),
-				React.createElement(
-					'h6',
-					null,
-					this.props.model.get('createdAt').toString().substring(0, 10)
-				),
-				React.createElement(
-					'h3',
-					null,
-					'Total: $',
-					this.state.priceTotal.toFixed(2)
-				),
-				React.createElement(
-					'section',
-					{ className: 'toggler', id: this.props.id },
-					each
-				)
-			)
-		);
-	},
-	expand: function expand() {
-		$('#' + this.props.id).toggle('slow');
-	}
-
-});
-
-},{"../models/ListProductsModel":188,"../models/ProductModel":189,"./EachProductComponent":175,"jquery":17,"react":173}],179:[function(require,module,exports){
+},{"../models/ProductModel":189,"./SingleProductBoxComponent":184,"react":173}],178:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34522,7 +34420,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"backbone":1,"jquery":17,"react":173}],180:[function(require,module,exports){
+},{"../models/ListModel":187,"backbone":1,"jquery":17,"react":173}],179:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34532,7 +34430,7 @@ var Backbone = require('backbone');
 var ProductModel = require('../models/ProductModel');
 var ListModel = require('../models/ListModel');
 var UserModel = require('../models/UserModel');
-var ListBoxComponent = require('./ListBoxComponent');
+var TotalPriceComponent = require('./TotalPriceComponent');
 var productQuery = new Parse.Query(ProductModel);
 var listQuery = new Parse.Query(ListModel);
 var EachProductComponent = require('./EachProductComponent');
@@ -34549,7 +34447,8 @@ module.exports = React.createClass({
 	getInitialState: function getInitialState() {
 		return {
 			lists: null,
-			error: null
+			error: null,
+			reload: false
 		};
 	},
 	componentWillMount: function componentWillMount() {
@@ -34557,7 +34456,7 @@ module.exports = React.createClass({
 
 		listQuery.descending('createdAt');
 		listQuery.find().then(function (lists) {
-			console.log(lists);
+			// console.log(lists);
 			_this.setState({ lists: lists });
 		});
 	},
@@ -34566,18 +34465,20 @@ module.exports = React.createClass({
 
 		if (this.state.lists !== null) {
 			// console.log(this.state.lists);
-			var jibby = this.state.lists.map(function (list) {
-				// console.log(list.id);
+			var jibby = this.state.lists.map(function (list, index) {
+				var totalPrice = React.createElement(TotalPriceComponent, { key: list.id, model: list });
 				var each = React.createElement(EachProductComponent, { key: list.id, model: list });
 				return React.createElement(
 					'div',
-					{ className: 'each' },
+					{ key: index, className: 'each' },
 					React.createElement(
 						'div',
 						{ className: 'eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp' },
 						React.createElement(
 							'button',
-							{ onClick: _this2.expand },
+							{ onClick: function () {
+									$('#' + list.id).toggle('slow');
+								} },
 							'See List'
 						),
 						React.createElement(
@@ -34590,15 +34491,18 @@ module.exports = React.createClass({
 							null,
 							list.get('createdAt').toString().substring(0, 10)
 						),
-						React.createElement(
-							'h3',
-							null,
-							'Total: $'
-						),
+						totalPrice,
 						React.createElement(
 							'section',
 							{ className: 'toggler', id: list.id },
-							each
+							each,
+							React.createElement(
+								'button',
+								{ onClick: function () {
+										return _this2.destroy(list.id, index);
+									}, className: 'deleteList' },
+								'Delete List'
+							)
 						)
 					)
 				);
@@ -34625,15 +34529,20 @@ module.exports = React.createClass({
 			);
 		}
 	},
-	expand: function expand() {
-		// console.log(this);
-		// console.log(Backbone.history.getFragment().substring(8,18));
-		$('.toggler').toggle('slow');
+	destroy: function destroy(id, index) {
+		var _this3 = this;
+
+		console.log(index);
+		var toDestroy = this.state.lists.splice(index, 1);
+		toDestroy[0].destroy().then(function () {
+			_this3.setState({ lists: _this3.state.lists });
+			$('.toggler').hide();
+		});
 	}
 
 });
 
-},{"../models/ListModel":187,"../models/ProductModel":189,"../models/UserModel":190,"./EachProductComponent":175,"./ListBoxComponent":178,"backbone":1,"backbone/node_modules/underscore":2,"react":173}],181:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ProductModel":189,"../models/UserModel":190,"./EachProductComponent":175,"./TotalPriceComponent":185,"backbone":1,"backbone/node_modules/underscore":2,"react":173}],180:[function(require,module,exports){
 //This is the navigation component. The router has been passed in as a property.
 'use strict';
 
@@ -34788,50 +34697,51 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"backbone":1,"bootstrap":3,"react":173}],182:[function(require,module,exports){
-"use strict";
+},{"../models/ListModel":187,"backbone":1,"bootstrap":3,"react":173}],181:[function(require,module,exports){
+'use strict';
 
 var React = require('react');
 
 module.exports = React.createClass({
-	displayName: "exports",
+	displayName: 'exports',
 
 	render: function render() {
+		// console.log(this.props.model.get('name').toLowerCase()[0]);
 		return React.createElement(
-			"div",
-			{ className: "col-xs-6 col-sm-4 col-md-3 xtraMargin" },
+			'div',
+			{ className: 'col-xs-6 col-sm-4 col-md-3 xtraMargin' },
 			React.createElement(
-				"div",
-				{ className: "listItems box-shadow--6dp" },
+				'div',
+				{ className: this.props.model.get('name').toLowerCase()[0] + ' listItems box-shadow--6dp' },
 				React.createElement(
-					"div",
-					{ id: 'button' + this.props.model.id, className: "button" },
+					'div',
+					{ id: 'button' + this.props.model.id, className: 'button' },
 					React.createElement(
-						"button",
-						{ className: "box-shadow--2dp addToCart", onClick: this.itemAdded },
+						'button',
+						{ className: 'box-shadow--2dp addToCart', onClick: this.itemAdded },
 						React.createElement(
-							"strong",
+							'strong',
 							null,
-							"+"
+							'+'
 						),
-						" To Cart"
+						' To Cart'
 					)
 				),
 				React.createElement(
-					"a",
+					'a',
 					{ href: '#details/' + this.props.model.id },
-					React.createElement("img", { className: "itemPic", src: this.props.model.get('urlPic') }),
+					React.createElement('img', { className: 'itemPic', src: this.props.model.get('urlPic') }),
 					React.createElement(
-						"h4",
-						{ className: "productBox" },
+						'h4',
+						{ className: 'productBox' },
 						this.props.model.get('name')
 					),
 					React.createElement(
-						"p",
+						'p',
 						null,
-						"$",
+						'$',
 						this.props.model.get('price'),
-						"/",
+						'/',
 						this.props.model.get('priceCategory')
 					)
 				)
@@ -34847,7 +34757,7 @@ module.exports = React.createClass({
 
 });
 
-},{"react":173}],183:[function(require,module,exports){
+},{"react":173}],182:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -34888,7 +34798,7 @@ module.exports = React.createClass({
 			listQuery.equalTo('objectId', Backbone.history.getFragment().substring(14, 24));
 			listQuery.find().then(function (list) {
 				list.map(function (listz) {
-					console.log(listz);
+					// console.log(listz);
 					_this.setState({
 						listItems: listz
 					});
@@ -34899,9 +34809,9 @@ module.exports = React.createClass({
 		// console.log(diet);
 		dietArray = Parse.User.current().get('dietArray');
 
-		productQuery.find().then(function (products) {
-			_this.setState({ items: products });
-		});
+		// productQuery.find().then((products) => {
+		// 	this.setState({items: products});
+		// });
 		productQuery.equalTo('category', 'produce');
 		productQuery.notContainedIn('ingredients', dietArray);
 		productQuery.find().then(function (products) {
@@ -34970,7 +34880,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'h2',
 						null,
-						'FreshMarketFoos'
+						'FreshMarketFoods'
 					)
 				),
 				React.createElement(
@@ -35085,6 +34995,16 @@ module.exports = React.createClass({
 		});
 	},
 	color: function color() {
+
+		if (this.refs.searchBox.value == '') {
+			$('.listItems').show();
+			$('.xtraMargin').css({ 'width': '25%' });
+		} else {
+			$('.listItems').hide();
+			$('.' + this.refs.searchBox.value).show();
+			$('.xtraMargin').css({ 'width': '100%' });
+		}
+
 		if (this.refs.searchBox.value === '1') {
 			console.log('1');
 			$('#body').css({ 'background-color': '#ECECEC' });
@@ -35101,7 +35021,7 @@ module.exports = React.createClass({
 
 });
 
-},{"../models/ListModel":187,"../models/ListProductsModel":188,"../models/ProductModel":189,"./ListDropdownComponent":179,"./ProductBoxComponent":182,"backbone":1,"jquery":17,"react":173}],184:[function(require,module,exports){
+},{"../models/ListModel":187,"../models/ListProductsModel":188,"../models/ProductModel":189,"./ListDropdownComponent":178,"./ProductBoxComponent":181,"backbone":1,"jquery":17,"react":173}],183:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -35199,7 +35119,7 @@ module.exports = React.createClass({
 
 });
 
-},{"jquery":17,"react":173}],185:[function(require,module,exports){
+},{"jquery":17,"react":173}],184:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -35249,7 +35169,57 @@ module.exports = React.createClass({
 	}
 });
 
-},{"react":173}],186:[function(require,module,exports){
+},{"react":173}],185:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var $ = require('jquery');
+var ProductModel = require('../models/ProductModel');
+var productQuery = new Parse.Query(ProductModel);
+var ListProductsModel = require('../models/ListProductsModel');
+
+module.exports = React.createClass({
+	displayName: 'exports',
+
+	getInitialState: function getInitialState() {
+		return {
+			listObject: this.props.model,
+			items: [],
+			prices: []
+		};
+	},
+	componentWillMount: function componentWillMount() {
+		var _this = this;
+
+		this.setState({ listObject: this.props.model });
+		var listProductsQuery = new Parse.Query(ListProductsModel);
+		listProductsQuery.equalTo('theList', this.state.listObject);
+		listProductsQuery.include('theProducts').find().then(function (lists) {
+			_this.setState({ items: lists });
+		});
+	},
+	render: function render() {
+		var total = 0;
+		var totalArray = [];
+		var xx = this.state.items.map(function (itemName) {
+			totalArray.push(itemName.get('theProducts').get('price'));
+		});
+		var totalNumbers = 0;
+		totalArray.length > 0 ? totalNumbers = totalArray.reduce(function (a, b) {
+			return a + b;
+		}) : '';
+
+		return React.createElement(
+			'h3',
+			{ className: 'totalListAmount' },
+			'Total: $',
+			totalNumbers.toFixed(2)
+		);
+	}
+
+});
+
+},{"../models/ListProductsModel":188,"../models/ProductModel":189,"jquery":17,"react":173}],186:[function(require,module,exports){
 'use strict';
 var React = require('react');
 var bootstrap = require('bootstrap');
@@ -35310,7 +35280,7 @@ $(document).on('ready', function () {
 	ReactDOM.render(React.createElement(NavigationComponent, { router: r }), document.getElementById('nav'));
 });
 
-},{"./components/AddListComponent":174,"./components/HomeComponent":176,"./components/ItemDetailsComponent":177,"./components/MyListsComponent":180,"./components/NavigationComponent":181,"./components/ProductSearchComponent":183,"./components/ProfileComponent":184,"backbone":1,"bootstrap":3,"jquery":17,"react":173,"react-dom":18}],187:[function(require,module,exports){
+},{"./components/AddListComponent":174,"./components/HomeComponent":176,"./components/ItemDetailsComponent":177,"./components/MyListsComponent":179,"./components/NavigationComponent":180,"./components/ProductSearchComponent":182,"./components/ProfileComponent":183,"backbone":1,"bootstrap":3,"jquery":17,"react":173,"react-dom":18}],187:[function(require,module,exports){
 'use strict';
 
 module.exports = Parse.Object.extend({

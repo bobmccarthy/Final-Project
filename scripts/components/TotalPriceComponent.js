@@ -25,26 +25,19 @@ module.exports = React.createClass({
 		});
 	},
 	render: function() {
+		var total=0;
+		var totalArray=[];
+		var xx = this.state.items.map((itemName)=>{
+			totalArray.push(itemName.get('theProducts').get('price'));
 
-		var z = this.state.items.map((itemName)=>{
-			
-			return(
-			<div className="row listBoxProducts">
-				<div className="col-xs-4"><h3>{itemName.get('theProducts').get('name')}</h3></div>
-				<div className="col-xs-1"><h3>Qty: </h3></div>
-				<div className="col-xs-3"><h3><input type="number"/></h3></div>
-				<div className="col-xs-4"><h3>${itemName.get('theProducts').get('price').toFixed(2)}</h3></div>
-			</div>
-			)
-			
 		})
-			
+		var totalNumbers=0;
+		totalArray.length > 0 ? totalNumbers = totalArray.reduce(function(a,b) {return a + b;}) : '';
+
 		return(
-			<div className="container-fluid">
-				
-				{z}
-				
-			</div>
+			<h3 className="totalListAmount">
+				Total: ${totalNumbers.toFixed(2)}
+			</h3>
 			)
 	
 	}
