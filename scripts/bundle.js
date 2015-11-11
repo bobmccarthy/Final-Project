@@ -34736,7 +34736,7 @@ module.exports = React.createClass({
 						'p',
 						null,
 						'$',
-						this.props.model.get('price'),
+						this.props.model.get('price').toFixed(2),
 						'/',
 						this.props.model.get('priceCategory')
 					)
@@ -35138,7 +35138,7 @@ module.exports = React.createClass({
 				"h4",
 				null,
 				"$",
-				this.props.model.get('price'),
+				this.props.model.get('price').toFixed(2),
 				"/",
 				this.props.model.get('priceCategory')
 			),

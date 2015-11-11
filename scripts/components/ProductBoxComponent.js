@@ -12,7 +12,7 @@ module.exports = React.createClass({
 					<div id={'button'+this.props.model.id} className="button"><button className="box-shadow--2dp addToCart" onClick={this.itemAdded}><strong>+</strong> To Cart</button></div>
 					<a href={'#details/'+this.props.model.id}><img className="itemPic" src={this.props.model.get('urlPic')}/>
 					<h4 className="productBox">{this.props.model.get('name')}</h4>
-					<p>${this.props.model.get('price')}/{this.props.model.get('priceCategory')}</p></a>
+					<p>${this.props.model.get('price').toFixed(2)}/{this.props.model.get('priceCategory')}</p></a>
 					
 				</div>
 			</div>

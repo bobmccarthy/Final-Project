@@ -185,6 +185,7 @@ body{
 }
 .xtraMargin{
 	margin-top: 1em;
+	text-align: center;
 }
 .listItems{
 	height: 14em;
@@ -215,8 +216,9 @@ body{
 		margin-bottom: 0.2em;
 	}
 	.largeImg{
-		width: 70%;
-		max-height: 20em;
+		// width: 70%;
+		// max-height: 20em;
+		height: 15em;
 	}
 	.back{
 		background-color: #F79227;

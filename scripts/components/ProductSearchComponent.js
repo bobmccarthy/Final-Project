@@ -138,9 +138,7 @@ module.exports = React.createClass({
 				<div className="container-fluid listContainer">
 					<div className="row">
 						<h1 className="categoryTitle">Produce:</h1>
-						
-							{produceElements}
-						
+						{produceElements}
 					</div>
 					<div className="row">
 						<h1 className="categoryTitle">Breads:</h1>

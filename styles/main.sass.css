@@ -134,7 +134,8 @@ body {
     display: none; }
 
 .xtraMargin {
-  margin-top: 1em; }
+  margin-top: 1em;
+  text-align: center; }
 
 .listItems {
   height: 14em;
@@ -159,8 +160,7 @@ body {
   .singleProduct .ingredientsP {
     margin-bottom: 0.2em; }
   .singleProduct .largeImg {
-    width: 70%;
-    max-height: 20em; }
+    height: 15em; }
   .singleProduct .back {
     background-color: #F79227;
     border-style: none;
