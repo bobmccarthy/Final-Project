@@ -1,7 +1,7 @@
 body {
   margin: 0;
   margin-top: 2.8em;
-  font-family: Hannotate SC;
+  font-family: futura;
   background-color: #ECECEC; }
 
 #login {
@@ -102,17 +102,9 @@ body {
   height: 1em;
   padding: 0 2em; }
 
-.homeBkg .item {
-  margin-top: 1em; }
-  .homeBkg .item h2 {
-    color: #F79227;
-    text-align: left;
-    margin-bottom: -0.4em;
-    margin-left: 1.8em; }
-  .homeBkg .item img {
-    height: 100%;
-    margin: 0 auto;
-    width: 60%; }
+.homeBkg .item img {
+  margin: 0 auto;
+  height: 100%; }
 
 .homeBkg footer {
   padding: 1em;
@@ -127,18 +119,12 @@ body {
 .right {
   float: right; }
 
-.listContainer {
-  margin: 2em;
-  margin-top: 0;
-  text-align: center; }
-
-.each {
-  margin-bottom: 1em;
-  margin-top: 1em; }
+.listThingy1 .row {
+  margin-left: 0;
+  margin-right: 0; }
 
 .eachList {
   background-color: white;
-  margin-top: 1em;
   padding: 1em; }
   .eachList h2 {
     margin-top: 0; }

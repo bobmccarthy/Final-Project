@@ -34189,7 +34189,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'h3',
 						null,
-						React.createElement('input', { type: 'number' })
+						React.createElement('input', { defaultValue: '1', type: 'number' })
 					)
 				),
 				React.createElement(
@@ -34230,7 +34230,7 @@ module.exports = React.createClass({
 			{ className: 'homeBkg' },
 			React.createElement(
 				'div',
-				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel', 'data-interval': '5000' },
+				{ id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel', 'data-interval': '20000' },
 				React.createElement(
 					'ol',
 					{ className: 'carousel-indicators' },
@@ -34244,7 +34244,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'div',
 						{ className: 'item active' },
-						React.createElement('img', { src: '../../images/comp2.jpg', alt: '...' }),
+						React.createElement('img', { className: 'computer1', src: '../../images/macbook1.jpg' }),
 						React.createElement(
 							'div',
 							{ className: 'carousel-caption' },
@@ -34254,7 +34254,7 @@ module.exports = React.createClass({
 					React.createElement(
 						'div',
 						{ className: 'item' },
-						React.createElement('img', { className: 'adjust', src: '../../images/phone.png', alt: '...' }),
+						React.createElement('img', { className: 'adjust', src: '../../images/gist_iphone6.jpg' }),
 						React.createElement(
 							'div',
 							{ className: 'carousel-caption' },
@@ -34470,46 +34470,42 @@ module.exports = React.createClass({
 				var each = React.createElement(EachProductComponent, { key: list.id, model: list });
 				return React.createElement(
 					'div',
-					{ key: index, className: 'each' },
+					{ key: index, className: 'eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp' },
 					React.createElement(
-						'div',
-						{ className: 'eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp' },
+						'button',
+						{ onClick: function () {
+								$('#' + list.id).toggle('slow');
+							} },
+						'See List'
+					),
+					React.createElement(
+						'h2',
+						null,
+						list.get('name')
+					),
+					React.createElement(
+						'h6',
+						null,
+						list.get('createdAt').toString().substring(0, 10)
+					),
+					totalPrice,
+					React.createElement(
+						'section',
+						{ className: 'toggler', id: list.id },
+						each,
 						React.createElement(
 							'button',
 							{ onClick: function () {
-									$('#' + list.id).toggle('slow');
-								} },
-							'See List'
-						),
-						React.createElement(
-							'h2',
-							null,
-							list.get('name')
-						),
-						React.createElement(
-							'h6',
-							null,
-							list.get('createdAt').toString().substring(0, 10)
-						),
-						totalPrice,
-						React.createElement(
-							'section',
-							{ className: 'toggler', id: list.id },
-							each,
-							React.createElement(
-								'button',
-								{ onClick: function () {
-										return _this2.destroy(list.id, index);
-									}, className: 'deleteList' },
-								'Delete List'
-							)
+									return _this2.destroy(list.id, index);
+								}, className: 'deleteList' },
+							'Delete List'
 						)
 					)
 				);
 			});
 			return React.createElement(
 				'div',
-				{ className: 'container-fluid' },
+				{ className: 'container-fluid', id: 'listThingy1' },
 				React.createElement(
 					'h1',
 					null,

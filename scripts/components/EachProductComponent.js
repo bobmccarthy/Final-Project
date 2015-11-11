@@ -32,7 +32,7 @@ module.exports = React.createClass({
 			<div className="row listBoxProducts">
 				<div className="col-xs-4"><h3>{itemName.get('theProducts').get('name')}</h3></div>
 				<div className="col-xs-1"><h3>Qty: </h3></div>
-				<div className="col-xs-3"><h3><input type="number"/></h3></div>
+				<div className="col-xs-3"><h3><input defaultValue="1" type="number"/></h3></div>
 				<div className="col-xs-4"><h3>${itemName.get('theProducts').get('price').toFixed(2)}</h3></div>
 			</div>
 			)

@@ -6,7 +6,7 @@ module.exports = React.createClass({
 	render: function() {
 		return(
 			<div className="homeBkg">
-				<div id="carousel-example-generic" className="carousel slide" data-ride="carousel" data-interval="5000">
+				<div id="carousel-example-generic" className="carousel slide" data-ride="carousel" data-interval="20000">
 					<ol className="carousel-indicators">
 						<li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
 						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
@@ -15,13 +15,13 @@ module.exports = React.createClass({
 
 					<div className="carousel-inner">
 						<div className="item active">
-							<img src="../../images/comp2.jpg" alt="..."/>
+							<img className="computer1" src="../../images/macbook1.jpg"/>
 							<div className="carousel-caption">
 								<h3></h3>
 							</div>
 						</div>
 						<div className="item">
-							<img className="adjust" src="../../images/phone.png" alt="..."/>
+							<img className="adjust" src="../../images/gist_iphone6.jpg"/>
 							<div className="carousel-caption">
 								<h3></h3>
 							</div>

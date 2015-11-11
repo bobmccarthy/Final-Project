@@ -36,22 +36,24 @@ module.exports = React.createClass({
 				var totalPrice = <TotalPriceComponent key={list.id} model={list} />
 				var each = <EachProductComponent key={list.id} model={list} />
 				return (
-					<div key={index} className="each">
-						<div className="eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp">
-							<button onClick={function(){$('#'+list.id).toggle('slow')}}>See List</button>
-							<h2>{list.get('name')}</h2>
-							<h6>{list.get('createdAt').toString().substring(0,10)}</h6>
-							{totalPrice}
-							<section className="toggler" id={list.id}>
-								{each}
-								<button onClick={() => this.destroy(list.id, index)} className="deleteList">Delete List</button>
-							</section>
+					
+						<div key={index} className="eachList col-xs-12 col-sm-8 col-sm-offset-2 box-shadow--2dp">
+							
+								<button onClick={function(){$('#'+list.id).toggle('slow')}}>See List</button>
+								<h2>{list.get('name')}</h2>
+								<h6>{list.get('createdAt').toString().substring(0,10)}</h6>
+								{totalPrice}
+								<section className="toggler" id={list.id}>
+									{each}
+									<button onClick={() => this.destroy(list.id, index)} className="deleteList">Delete List</button>
+								</section>
+							
 						</div>
-					</div>
+					
 				)
 			})
 			return(
-				<div className="container-fluid">
+				<div className="container-fluid" id="listThingy1">
 					<h1>Your Current Grocery Lists:</h1>
 					<div className="row">
 						{jibby}
