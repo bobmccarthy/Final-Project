@@ -53,7 +53,7 @@ module.exports = React.createClass({
 				)
 			})
 			return(
-				<div className="container-fluid" id="listThingy1">
+				<div className="container-fluid">
 					<h1>Your Current Grocery Lists:</h1>
 					<div className="row">
 						{jibby}

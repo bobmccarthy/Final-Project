@@ -34169,7 +34169,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'col-xs-4' },
 					React.createElement(
-						'h3',
+						'h4',
 						null,
 						itemName.get('theProducts').get('name')
 					)
@@ -34178,7 +34178,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'col-xs-1' },
 					React.createElement(
-						'h3',
+						'h4',
 						null,
 						'Qty: '
 					)
@@ -34187,7 +34187,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'col-xs-3' },
 					React.createElement(
-						'h3',
+						'h4',
 						null,
 						React.createElement('input', { defaultValue: '1', type: 'number' })
 					)
@@ -34196,7 +34196,7 @@ module.exports = React.createClass({
 					'div',
 					{ className: 'col-xs-4' },
 					React.createElement(
-						'h3',
+						'h4',
 						null,
 						'$',
 						itemName.get('theProducts').get('price').toFixed(2)
@@ -34505,7 +34505,7 @@ module.exports = React.createClass({
 			});
 			return React.createElement(
 				'div',
-				{ className: 'container-fluid', id: 'listThingy1' },
+				{ className: 'container-fluid' },
 				React.createElement(
 					'h1',
 					null,

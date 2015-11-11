@@ -119,13 +119,10 @@ body {
 .right {
   float: right; }
 
-.listThingy1 .row {
-  margin-left: 0;
-  margin-right: 0; }
-
 .eachList {
   background-color: white;
-  padding: 1em; }
+  padding: 1em;
+  margin-top: 1em; }
   .eachList h2 {
     margin-top: 0; }
   .eachList button {

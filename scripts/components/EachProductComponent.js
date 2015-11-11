@@ -30,10 +30,10 @@ module.exports = React.createClass({
 			
 			return(
 			<div className="row listBoxProducts">
-				<div className="col-xs-4"><h3>{itemName.get('theProducts').get('name')}</h3></div>
-				<div className="col-xs-1"><h3>Qty: </h3></div>
-				<div className="col-xs-3"><h3><input defaultValue="1" type="number"/></h3></div>
-				<div className="col-xs-4"><h3>${itemName.get('theProducts').get('price').toFixed(2)}</h3></div>
+				<div className="col-xs-4"><h4>{itemName.get('theProducts').get('name')}</h4></div>
+				<div className="col-xs-1"><h4>Qty: </h4></div>
+				<div className="col-xs-3"><h4><input defaultValue="1" type="number"/></h4></div>
+				<div className="col-xs-4"><h4>${itemName.get('theProducts').get('price').toFixed(2)}</h4></div>
 			</div>
 			)
 			
